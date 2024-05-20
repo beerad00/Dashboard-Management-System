@@ -2,6 +2,7 @@ package com.cooksys.groupfinal.services.impl;
 
 import java.util.Optional;
 
+import com.cooksys.groupfinal.dtos.UserRequestDto;
 import org.springframework.stereotype.Service;
 
 import com.cooksys.groupfinal.dtos.CredentialsDto;
@@ -50,9 +51,8 @@ public class UserServiceImpl implements UserService {
         }
         return fullUserMapper.entityToFullUserDto(userToValidate);
 	}
-	
-	
-	
+
+
 	
 	
 	
