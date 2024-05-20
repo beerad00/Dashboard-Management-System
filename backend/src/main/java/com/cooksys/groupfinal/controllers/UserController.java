@@ -1,12 +1,9 @@
 package com.cooksys.groupfinal.controllers;
 
-import com.cooksys.groupfinal.dtos.CompanyDto;
-import com.cooksys.groupfinal.dtos.UserRequestDto;
+import com.cooksys.groupfinal.dtos.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import com.cooksys.groupfinal.dtos.CredentialsDto;
-import com.cooksys.groupfinal.dtos.FullUserDto;
 import com.cooksys.groupfinal.services.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -29,6 +26,12 @@ public class UserController {
     @GetMapping("/{id}/companies")
     public Set<CompanyDto> getCompaniesByUserId(@PathVariable Long id){
         return userService.getCompaniesByUserId(id);
+    }
+
+    @PostMapping("/create")
+    @ResponseStatus(HttpStatus.CREATED)
+    public FullUserDto createUser(@RequestBody CreateUserDto createUserDto) {
+        return userService.createUser(createUserDto);
     }
 
 }

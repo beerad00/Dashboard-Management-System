@@ -1,9 +1,6 @@
 package com.cooksys.groupfinal.services;
 
-import com.cooksys.groupfinal.dtos.CompanyDto;
-import com.cooksys.groupfinal.dtos.CredentialsDto;
-import com.cooksys.groupfinal.dtos.FullUserDto;
-import com.cooksys.groupfinal.dtos.UserRequestDto;
+import com.cooksys.groupfinal.dtos.*;
 
 import java.util.Set;
 
@@ -13,6 +10,8 @@ public interface UserService {
 
 	Set<CompanyDto> getCompaniesByUserId(Long id);
 
+	FullUserDto createUser(CreateUserDto createUserDto);
 
-//	UserRequestDto createUser(UserRequestDto userRequestDto);
+
+
 }
