@@ -1,4 +1,5 @@
-export interface UserRequestDto {
+export interface createUserDto {
+    companyId: number,
     username: string;
     email: string;
     firstName: string;

@@ -4,17 +4,17 @@ import { CompanyService } from '../services/company.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-admin-dashboard',
-  templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.css']
+  selector: 'app-user-registry',
+  templateUrl: './user-registry.component.html',
+  styleUrls: ['./user-registry.component.css']
 })
-export class AdminDashboardComponent implements OnInit {
+export class UserRegistryComponent implements OnInit {
   users: FullUserDto[] = [];
   selectedCompanyId: number | null = null;
 
   constructor(
     private companyService: CompanyService,
-    public router: Router,
+    private router: Router,
     private route: ActivatedRoute
   ) {}
 
@@ -23,8 +23,6 @@ export class AdminDashboardComponent implements OnInit {
       this.selectedCompanyId = +params['companyId'] || null;
       if (this.selectedCompanyId) {
         this.fetchUsers(this.selectedCompanyId);
-      } else {
-        this.router.navigate(['/select-company']);
       }
     });
   }
@@ -36,7 +34,7 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
-  onAddUser() {
+  navigateToAddUser() {
     this.router.navigate(['/add-user']);
   }
 }
