@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CredentialsDto } from '../models/credentials.dto';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-company',
@@ -7,5 +7,12 @@ import { CredentialsDto } from '../models/credentials.dto';
   styleUrls: ['./company.component.css']
 })
 export class CompanyComponent {
-  
-}
+  userCompanies: any[] = [];
+
+  constructor(private authService: AuthService) {
+  }
+
+  ngOnInit(): void {
+    
+  }
+ }
