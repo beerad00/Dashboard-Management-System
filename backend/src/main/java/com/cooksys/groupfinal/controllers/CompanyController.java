@@ -30,7 +30,6 @@ public class CompanyController {
         return companyService.getAllCompanies();
     }
 
-
     @GetMapping("/{id}/announcements")
     public Set<AnnouncementDto> getAllAnnouncements(@PathVariable Long id) {
         return companyService.getAllAnnouncements(id);

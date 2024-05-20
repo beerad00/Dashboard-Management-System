@@ -1,8 +1,13 @@
 package com.cooksys.groupfinal.services.impl;
 
 import java.util.Optional;
+import java.util.Set;
 
+import com.cooksys.groupfinal.dtos.CompanyDto;
 import com.cooksys.groupfinal.dtos.UserRequestDto;
+import com.cooksys.groupfinal.entities.Company;
+import com.cooksys.groupfinal.mappers.CompanyMapper;
+import com.cooksys.groupfinal.repositories.CompanyRepository;
 import org.springframework.stereotype.Service;
 
 import com.cooksys.groupfinal.dtos.CredentialsDto;
@@ -26,8 +31,10 @@ public class UserServiceImpl implements UserService {
 	private final UserRepository userRepository;
   private final FullUserMapper fullUserMapper;
 	private final CredentialsMapper credentialsMapper;
-	
-	private User findUser(String username) {
+    private final CompanyRepository companyRepository;
+    private final CompanyMapper companyMapper;
+
+    private User findUser(String username) {
         Optional<User> user = userRepository.findByCredentialsUsernameAndActiveTrue(username);
         if (user.isEmpty()) {
             throw new NotFoundException("The username provided does not belong to an active user.");
@@ -52,9 +59,14 @@ public class UserServiceImpl implements UserService {
         return fullUserMapper.entityToFullUserDto(userToValidate);
 	}
 
+    @Override
+    public Set<CompanyDto> getCompaniesByUserId(Long id) {
+        Set<Company> companiesFound = companyRepository.findByUserId(id);
 
-	
-	
+        return companyMapper.entitiesToDtos(companiesFound);
+
+    }
+
 	
 
 }

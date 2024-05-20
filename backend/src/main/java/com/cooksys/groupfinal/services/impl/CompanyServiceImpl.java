@@ -96,5 +96,4 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyMapper.entitiesToDtos(companies);
 	}
 
-
 }
