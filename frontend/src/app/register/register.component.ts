@@ -14,7 +14,8 @@ export class RegisterComponent {
     email: '',
     firstName: '',
     lastName: '',
-    password: ''
+    password: '',
+    admin: false 
   };
 
   constructor(private authService: AuthService, private router: Router) {}

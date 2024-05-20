@@ -4,4 +4,5 @@ export interface UserRequestDto {
     firstName: string;
     lastName: string;
     password: string;
+    admin: boolean; // Add this property if it's missing
   }
