@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { TeamsComponent } from './teams/teams.component';
+import { CompanyComponent } from './company/company.component';
 
 
 const routes: Routes = [
@@ -32,7 +33,8 @@ const routes: Routes = [
     RegisterComponent,
     AddUserComponent,
     AdminDashboardComponent,
-    DashboardComponent
+    DashboardComponent,
+    CompanyComponent
   ],
   imports: [
     BrowserModule,
