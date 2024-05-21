@@ -12,7 +12,7 @@ import { tap } from 'rxjs';
     providedIn: 'root'
   })
   export class AuthService {
-    private apiUrl = 'http://localhost:8080/users'; // Ensure the URL is correct
+    private apiUrl = 'http://localhost:8080/users';
     private currentUser: FullUserDto | null = null;
   
     constructor(private http: HttpClient) {}
@@ -37,5 +37,14 @@ import { tap } from 'rxjs';
     private handleError(error: any) {
       console.error('An error occurred', error);
       return throwError(() => new Error('Something went wrong; please try again later.'));
+    }
+
+    getUserCompanies() {
+      const userId = localStorage.getItem('currentUser')
+      console.log(userId);
+  
+      console.log(`${this.apiUrl}/${userId}/companies`);
+      console.log(JSON.stringify(this.http.get(`${this.apiUrl}/${userId}/companies`)))
+      return this.http.get(`${this.apiUrl}/${userId}/companies`);
     }
   }

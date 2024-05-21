@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AddUserComponent } from './add-user/add-user.component';
+import { CompanyComponent } from './company/company.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'add-user', component: AddUserComponent },
+  { path: 'company-select', component: CompanyComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
