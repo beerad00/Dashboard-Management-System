@@ -1,6 +1,6 @@
+// src/app/services/company.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
 import { FullUserDto } from '../models/full-user.dto';
 import { CompanyDto } from '../models/company.dto';
 import { AnnouncementDto } from '../models/announcementDto';
@@ -14,7 +14,6 @@ export class CompanyService {
   private apiUrl = 'http://localhost:8080/company'; 
 
   constructor(private http: HttpClient) {}
-
 
   async getUsersByCompanyId(companyId: number): Promise<FullUserDto[]> {
     try {
@@ -77,7 +76,20 @@ export class CompanyService {
       return response;
     } catch (error) {
       this.handleError(error);
-      return {} as ProjectDto;
+      throw error;
+    }
+  }
+
+  async createProject(project: ProjectDto, teamId: number): Promise<ProjectDto> {
+    try {
+      const response = await this.http.post<ProjectDto>(`${this.apiUrl}/${teamId}`, project).toPromise();
+      if (!response) {
+        throw new Error('Failed to create project');
+      }
+      return response;
+    } catch (error) {
+      this.handleError(error);
+      throw error;
     }
   }
 
