@@ -14,7 +14,6 @@ import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { TeamsComponent } from './teams/teams.component';
-import { CompanyComponent } from './company/company.component';
 import { UserRegistryComponent } from './user-registry/user-registry.component';
 import { CompanySelectComponent } from './company-select/company-select.component';
 import { CompanyService } from './services/company.service';
@@ -28,7 +27,6 @@ import { CompanyService } from './services/company.service';
     AdminDashboardComponent,
     CompanySelectComponent,
     AddUserComponent,
-    CompanyComponent
   ],
   imports: [
     BrowserModule,
