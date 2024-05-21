@@ -34,21 +34,19 @@ export class AddUserComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.userRequest.password !== this.confirmPassword) {
       console.error('Passwords do not match');
       return;
     }
 
     if (this.companyId) {
-      this.authService.register(this.userRequest).subscribe({
-        next: () => {
-          this.router.navigate(['/admin-dashboard']);
-        },
-        error: (error) => {
-          console.error('Adding user failed', error);
-        }
-      });
+      try {
+        await this.authService.register(this.userRequest);
+        this.router.navigate(['/admin-dashboard']);
+      } catch (error) {
+        console.error('Adding user failed', error);
+      }
     } else {
       console.error('No company ID selected');
     }

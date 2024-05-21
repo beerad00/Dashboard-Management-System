@@ -1,4 +1,20 @@
-<!-- user-dashboard.component.html -->
-<h1>User Dashboard</h1>
-<p>Welcome to the user dashboard! Here you can see announcements, projects, and more.</p>
-<!-- Add additional options and features for non-admin users here -->
+<div class="user-dashboard">
+    <h1>User Dashboard</h1>
+    <p>Welcome to the user dashboard! Here you can see announcements, projects, and more.</p>
+    <button (click)="getAnnouncements()">Get Announcements</button>
+    
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    
+    <div *ngIf="announcements.length > 0">
+      <h2>Announcements</h2>
+      <ul>
+        <li *ngFor="let announcement of announcements">
+          <h3>{{ announcement.title }}</h3>
+          <p>{{ announcement.message }}</p>
+          <small>Posted on: {{ announcement.date | date }}</small>
+          <p>Author: {{ announcement.author.profile.firstName }} {{ announcement.author.profile.lastName }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  

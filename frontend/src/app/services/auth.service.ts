@@ -11,30 +11,43 @@ import { createUserDto } from '../models/createUserDto';
   providedIn: 'root'
 })
 export class AuthService {
-    private apiUrl = 'http://localhost:8080/users';
-    private currentUser: FullUserDto | null = null;
-  
-    constructor(private http: HttpClient) {}
-  
-    login(credentials: CredentialsDto): Observable<FullUserDto> {
-      return this.http.post<FullUserDto>(`${this.apiUrl}/login`, credentials)
-        .pipe(
-          tap((user: FullUserDto) => this.currentUser = user),
-          catchError(this.handleError)
-        );
+  private apiUrl = 'http://localhost:8080/users';
+  private currentUser: FullUserDto | null = null;
+
+  constructor(private http: HttpClient) {}
+
+  async login(credentials: CredentialsDto): Promise<FullUserDto> {
+    const response = await this.http.post<FullUserDto>(`${this.apiUrl}/login`, credentials).toPromise();
+    if (!response) {
+      throw new Error('Login failed');
     }
-  
-    register(userRequest: createUserDto): Observable<any> {
-      return this.http.post(`${this.apiUrl}/create`, userRequest)
-        .pipe(catchError(this.handleError));
-    }
-  
-    getCurrentUser(): FullUserDto | null {
-      return this.currentUser;
-    }
-  
-    private handleError(error: any) {
-      console.error('An error occurred', error);
-      return throwError(() => new Error('Something went wrong; please try again later.'));
+    this.currentUser = response;
+    return response;
+  }
+
+  async register(userRequest: createUserDto): Promise<any> {
+    return this.http.post(`${this.apiUrl}/create`, userRequest).toPromise();
+  }
+
+  getCurrentUser(): FullUserDto | null {
+    return this.currentUser;
+  }
+
+  async getCompaniesByUserId(userId: number): Promise<CompanyDto[]> {
+    try {
+      const response = await this.http.get<CompanyDto[]>(`${this.apiUrl}/${userId}/companies`).toPromise();
+      if (!response) {
+        throw new Error('No companies found');
+      }
+      return response;
+    } catch (error) {
+      this.handleError(error);
+      return [];
     }
   }
+
+  private handleError(error: any): void {
+    console.error('An error occurred', error);
+    // You can handle specific error scenarios here if needed
+  }
+}

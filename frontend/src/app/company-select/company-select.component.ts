@@ -17,12 +17,17 @@ export class CompanySelectComponent implements OnInit {
   constructor(private companyService: CompanyService, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
+    this.loadCompanies();
+  }
+
+  async loadCompanies(): Promise<void> {
     const currentUser = this.authService.getCurrentUser();
     if (currentUser) {
-      this.companyService.getCompaniesByUserId(currentUser.id).subscribe({
-        next: (companies) => this.companies = companies,
-        error: (error: any) => console.error('Failed to fetch companies', error)
-      });
+      try {
+        this.companies = await this.authService.getCompaniesByUserId(currentUser.id);
+      } catch (error) {
+        console.error('Failed to fetch companies', error);
+      }
     }
   }
 

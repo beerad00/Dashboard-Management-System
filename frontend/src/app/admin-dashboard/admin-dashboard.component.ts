@@ -29,11 +29,12 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
-  fetchUsers(companyId: number) {
-    this.companyService.getUsersByCompanyId(companyId).subscribe({
-      next: (users: FullUserDto[]) => this.users = users,
-      error: (error: any) => console.error('Failed to load users', error)
-    });
+  async fetchUsers(companyId: number) {
+    try {
+      this.users = await this.companyService.getUsersByCompanyId(companyId);
+    } catch (error) {
+      console.error('Failed to load users', error);
+    }
   }
 
   onAddUser() {
