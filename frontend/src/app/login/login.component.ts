@@ -24,7 +24,11 @@ export class LoginComponent {
       next: (response) => {
         console.log('Login response:', response);
         if (response && response.profile) {
-          this.router.navigate(['/select-company']); // Redirect to company selection page
+          if (response.admin) {
+            this.router.navigate(['/select-company']); // Redirect to company selection page for admins
+          } else {
+            this.router.navigate(['/user-dashboard']); // Redirect to user dashboard for non-admins
+          }
         } else {
           console.error('Unexpected response structure:', response);
           this.errorMessage = 'Unexpected response structure.';

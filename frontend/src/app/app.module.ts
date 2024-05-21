@@ -16,6 +16,7 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { UserRegistryComponent } from './user-registry/user-registry.component';
 import { CompanySelectComponent } from './company-select/company-select.component';
 import { CompanyService } from './services/company.service';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { CompanyService } from './services/company.service';
     LoginComponent,
     RegisterComponent,
     AdminDashboardComponent,
+    UserDashboardComponent, // Declare the new component
     CompanySelectComponent,
     AddUserComponent
   ],
@@ -33,7 +35,7 @@ import { CompanyService } from './services/company.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AuthService, CompanyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
