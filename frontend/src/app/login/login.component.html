@@ -1,0 +1,15 @@
+<div class="login-container">
+    <div class="login-box">
+      <h1>COOK SYSTEMS</h1>
+      <h2>A FINAL APP</h2>
+      <form (ngSubmit)="onSubmit()">
+        <label for="username">Username</label>
+        <input type="text" id="username" [(ngModel)]="credentials.username" name="username" required>
+        
+        <label for="password">Password</label>
+        <input type="password" id="password" [(ngModel)]="credentials.password" name="password" required>
+        
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>

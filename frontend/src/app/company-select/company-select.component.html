@@ -1,0 +1,11 @@
+<div class="company-select-container">
+    <h1>Select a Company</h1>
+    <form (ngSubmit)="onSelectCompany()">
+      <label for="company">Company</label>
+      <select id="company" [(ngModel)]="selectedCompanyId" name="company" required>
+        <option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</option>
+      </select>
+      <button type="submit">Select Company</button>
+    </form>
+  </div>
+  
