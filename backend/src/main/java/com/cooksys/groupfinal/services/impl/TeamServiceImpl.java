@@ -22,7 +22,6 @@ public class TeamServiceImpl implements TeamService {
     {
         Team team = teamMapper.dtoToEntity(teamDto);
         team.setCompany(companyRepository.findById(companyId).get());
-        //teamMapper.dtoToEntity(teamRepository.saveAndFlush(teamMapper.dtoToEntity(teamRequestDto)));
         return teamMapper.entityToDto(teamRepository.saveAndFlush(team));
     }
 
