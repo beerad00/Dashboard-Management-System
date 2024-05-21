@@ -1,3 +1,4 @@
+// src/app/user-dashboard/user-dashboard.component.ts
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { CompanyService } from '../services/company.service';
