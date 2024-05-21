@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FullUserDto } from '../models/full-user.dto';
 import { CompanyService } from '../services/company.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { AnnouncementDto } from '../models/announcementDto';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -10,9 +12,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AdminDashboardComponent implements OnInit {
   users: FullUserDto[] = [];
+  announcements: AnnouncementDto[] = [];
   selectedCompanyId: number | null = null;
+  errorMessage: string = '';
 
   constructor(
+    private authService: AuthService,
     private companyService: CompanyService,
     public router: Router,
     private route: ActivatedRoute
@@ -23,6 +28,7 @@ export class AdminDashboardComponent implements OnInit {
       this.selectedCompanyId = +params['companyId'] || null;
       if (this.selectedCompanyId) {
         this.fetchUsers(this.selectedCompanyId);
+        this.getAnnouncements(this.selectedCompanyId);
       } else {
         this.router.navigate(['/select-company']);
       }
@@ -35,6 +41,24 @@ export class AdminDashboardComponent implements OnInit {
     } catch (error) {
       console.error('Failed to load users', error);
     }
+  }
+
+  async getAnnouncements(companyId: number): Promise<void> {
+    try {
+      const announcements = await this.companyService.getAnnouncementsByCompanyId(companyId);
+      this.handleAnnouncementsResponse(announcements);
+    } catch (error) {
+      this.handleError('Failed to fetch announcements', error);
+    }
+  }
+
+  private handleAnnouncementsResponse(announcements: AnnouncementDto[]): void {
+    this.announcements = announcements;
+  }
+
+  private handleError(message: string, error: any): void {
+    console.error(message, error);
+    this.errorMessage = message + '. Please try again later.';
   }
 
   onAddUser() {

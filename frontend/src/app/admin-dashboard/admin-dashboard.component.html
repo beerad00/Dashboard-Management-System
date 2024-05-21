@@ -1,26 +1,41 @@
 <div class="admin-dashboard">
-    <h1>Welcome to the admin dashboard!</h1>
-    <button (click)="router.navigate(['/add-user'])">Create User</button>
-    <div *ngIf="users.length">
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Active</th>
-            <th>Admin</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of users">
-            <td>{{ user.profile.firstName }} {{ user.profile.lastName }}</td>
-            <td>{{ user.profile.email }}</td>
-            <td>{{ user.active ? 'YES' : 'NO' }}</td>
-            <td>{{ user.admin ? 'YES' : 'NO' }}</td>
-            <td>{{ user.status }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <h1>Welcome to the admin dashboard!</h1>
+  <button (click)="onAddUser()">Create User</button>
+  <div *ngIf="users.length > 0">
+    <h2>Users</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Active</th>
+          <th>Admin</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.profile.firstName }} {{ user.profile.lastName }}</td>
+          <td>{{ user.profile.email }}</td>
+          <td>{{ user.active ? 'YES' : 'NO' }}</td>
+          <td>{{ user.admin ? 'YES' : 'NO' }}</td>
+          <td>{{ user.status }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+
+  <div *ngIf="announcements.length > 0">
+    <h2>Announcements</h2>
+    <ul>
+      <li *ngFor="let announcement of announcements">
+        <h3>{{ announcement.title }}</h3>
+        <p>{{ announcement.message }}</p>
+        <small>Posted on: {{ announcement.date | date }}</small>
+        <p>Author: {{ announcement.author.profile.firstName }} {{ announcement.author.profile.lastName }}</p>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+</div>
