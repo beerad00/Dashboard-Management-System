@@ -28,7 +28,6 @@ export class AdminDashboardComponent implements OnInit {
       this.selectedCompanyId = +params['companyId'] || null;
       if (this.selectedCompanyId) {
         this.fetchUsers(this.selectedCompanyId);
-        this.getAnnouncements(this.selectedCompanyId);
       } else {
         this.router.navigate(['/select-company']);
       }
@@ -43,12 +42,16 @@ export class AdminDashboardComponent implements OnInit {
     }
   }
 
-  async getAnnouncements(companyId: number): Promise<void> {
-    try {
-      const announcements = await this.companyService.getAnnouncementsByCompanyId(companyId);
-      this.handleAnnouncementsResponse(announcements);
-    } catch (error) {
-      this.handleError('Failed to fetch announcements', error);
+  async getAnnouncements(): Promise<void> {
+    if (this.selectedCompanyId) {
+      try {
+        const announcements = await this.companyService.getAnnouncementsByCompanyId(this.selectedCompanyId);
+        this.handleAnnouncementsResponse(announcements);
+      } catch (error) {
+        this.handleError('Failed to fetch announcements', error);
+      }
+    } else {
+      this.errorMessage = 'No company selected.';
     }
   }
 
