@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.button {
+    padding: 0.5rem 1rem;
+    border: 2px solid transparent;
+    border-radius: 0.25rem;
+    background-color: #4a90e2; /* Change color as needed */
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .button:hover {
+    background-color: #357ae8; /* Change color as needed */
+  }

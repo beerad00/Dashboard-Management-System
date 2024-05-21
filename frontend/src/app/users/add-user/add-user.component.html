@@ -1,6 +1,6 @@
 <div class="add-user-container">
   <div class="add-user-box">
-    <h1>Add User</h1>
+    <h1 class="text-2xl text-center" >Add User</h1>
     <form (ngSubmit)="onSubmit()" class="form">
       <label for="username">Username</label>
       <input class="form-group input" type="text" id="username" [(ngModel)]="userRequest.username" name="username" required>
@@ -32,6 +32,7 @@
       </select>
 
       <button type="submit">Submit</button>
+      <button (click)="this.navigateToUsers()" type="submit">Cancel</button>
     </form>
   </div>
 </div>

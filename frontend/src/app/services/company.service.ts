@@ -21,6 +21,7 @@ export class CompanyService {
       if (!response) {
         throw new Error('No users found');
       }
+      console.log(response, 'response')
       return response;
     } catch (error) {
       this.handleError(error);

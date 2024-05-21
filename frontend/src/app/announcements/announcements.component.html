@@ -1,15 +1,13 @@
-<p>announcements works!</p>
-
-<div *ngIf="announcements.length > 0">
-    <h2>Announcements</h2>
+<div *ngIf="loading" class="flex flex-col justify-center items-center m-auto text-4xl">Loading...</div>
+<div class="flex flex-col justify-center items-center pt-4" *ngIf="announcements.length > 0">
+    <h2 class="text-3xl">Announcements</h2>
     <ul>
       <li *ngFor="let announcement of announcements">
-        <h3>{{ announcement.title }}</h3>
-        <p>{{ announcement.message }}</p>
-        <small>Posted on: {{ announcement.date | date }}</small>
-        <p>Author: {{ announcement.author.profile.firstName }} {{ announcement.author.profile.lastName }}</p>
+        <app-announcement-card [announcement]="announcement"></app-announcement-card>
       </li>
     </ul>
   </div>
 
   <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+

@@ -28,35 +28,9 @@
 
   <button (click)="getAnnouncements()">Get Announcements</button>
 
-  <div *ngIf="announcements.length > 0">
-    <h2>Announcements</h2>
-    <ul>
-      <li *ngFor="let announcement of announcements">
-        <h3>{{ announcement.title }}</h3>
-        <p>{{ announcement.message }}</p>
-        <small>Posted on: {{ announcement.date | date }}</small>
-        <p>Author: {{ announcement.author.profile.firstName }} {{ announcement.author.profile.lastName }}</p>
-      </li>
-    </ul>
-  </div>
+<app-announcements></app-announcements>
 
-  <button (click)="getTeams()">Get Teams</button>
-
-  <div *ngIf="teams.length > 0">
-    <h2>Teams</h2>
-    <ul>
-      <li *ngFor="let team of teams">
-        <h3>{{ team.name }}</h3>
-        <p>{{ team.description }}</p>
-        <p>Members: 
-          <span *ngFor="let member of team.teammates">
-            {{ member.profile.firstName }} {{ member.profile.lastName }}{{team.teammates.indexOf(member) !== team.teammates.length - 1 ? ', ' : ''}}
-          </span>
-        </p>
-        <button (click)="getProjects(team.id)">Get Projects</button>
-      </li>
-    </ul>
-  </div>
+  
 
   <div *ngIf="projects.length > 0">
     <h2>Projects</h2>

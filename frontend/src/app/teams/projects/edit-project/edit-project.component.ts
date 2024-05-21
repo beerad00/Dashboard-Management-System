@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Input } from '@angular/core';
 import { Output } from '@angular/core';
-import { ProjectDto } from '../models/projectDto';
-import { CompanyService } from '../services/company.service';
-import { ProjectService } from '../services/project.service';
+import { ProjectDto } from '../../../models/projectDto';
+import { CompanyService } from '../../../services/company.service';
+import { ProjectService } from '../../../services/project.service';
 
 
 @Component({

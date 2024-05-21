@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { UserRequestDto } from '../models/user-request.dto';
-import { createUserDto } from '../models/createUserDto';
+import { AuthService } from '../../services/auth.service';
+import { UserRequestDto } from '../../models/user-request.dto';
+import { createUserDto } from '../../models/createUserDto';
 
 @Component({
   selector: 'app-add-user',
@@ -26,13 +26,8 @@ export class AddUserComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    const companyId = localStorage.getItem('selectedCompanyId');
-    this.companyId = companyId ? parseInt(companyId, 10) : null;
-    if (this.companyId) {
-      this.userRequest.companyId = this.companyId;
-    } else {
-      this.router.navigate(['/select-company']);
-    }
+    this.companyId = Number(localStorage.getItem('selectedCompanyId'));
+   
   }
 
   async onSubmit() {
@@ -43,13 +38,19 @@ export class AddUserComponent implements OnInit {
 
     if (this.companyId) {
       try {
+        this.userRequest.companyId = this.companyId;
         await this.authService.register(this.userRequest);
-        this.router.navigate(['/admin-dashboard']);
+        console.log('User added successfully', this.userRequest);
+        this.router.navigate(['/users']);
       } catch (error) {
         console.error('Adding user failed', error);
       }
     } else {
       console.error('No company ID selected');
     }
+  }
+
+  navigateToUsers() {
+    this.router.navigate(['/users']);
   }
 }

@@ -16,6 +16,7 @@ export class AnnouncementsComponent {
   announcements: AnnouncementDto[] = [];
   selectedCompanyId: number | null = null;
   errorMessage: string = '';
+  loading: boolean = false;
 
 
   constructor(
@@ -48,10 +49,10 @@ export class AnnouncementsComponent {
     if (this.selectedCompanyId) {
       console.log(this.selectedCompanyId);
       try {
-        
         const announcements = await this.companyService.getAnnouncementsByCompanyId(this.selectedCompanyId);
         this.handleAnnouncementsResponse(announcements);
       } catch (error) {
+        this.loading = true;
         this.handleError('Failed to fetch announcements', error);
       }
     } else {
@@ -61,6 +62,7 @@ export class AnnouncementsComponent {
 
   private handleAnnouncementsResponse(announcements: AnnouncementDto[]): void {
     this.announcements = announcements;
+    this.loading = false;
   }
 
   private handleError(message: string, error: any): void {

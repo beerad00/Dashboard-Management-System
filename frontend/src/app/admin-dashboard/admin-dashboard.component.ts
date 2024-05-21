@@ -1,22 +1,13 @@
-<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
 import { FullUserDto } from '../models/full-user.dto';
 import { CompanyService } from '../services/company.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { AnnouncementDto } from '../models/announcementDto';
-=======
-// src/app/admin-dashboard/admin-dashboard.component.ts
-import { Component, OnInit } from '@angular/core';
-import { FullUserDto } from '../models/full-user.dto';
-import { CompanyService } from '../services/company.service';
-import { ProjectService } from '../services/project.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { AnnouncementDto } from '../models/announcementDto';
 import { TeamDto } from '../models/team.dto';
 import { ProjectDto } from '../models/projectDto';
->>>>>>> origin/simrath-branch2
+import { ProjectService } from '../services/project.service';
+
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -26,24 +17,17 @@ import { ProjectDto } from '../models/projectDto';
 export class AdminDashboardComponent implements OnInit {
   users: FullUserDto[] = [];
   announcements: AnnouncementDto[] = [];
-<<<<<<< HEAD
-  selectedCompanyId: number | null = null;
-=======
   teams: TeamDto[] = [];
   projects: ProjectDto[] = [];
   selectedProject: ProjectDto | null = null;
   selectedCompanyId: number | null = null;
   selectedTeamId: number | null = null;
->>>>>>> origin/simrath-branch2
   errorMessage: string = '';
 
   constructor(
     private authService: AuthService,
     private companyService: CompanyService,
-<<<<<<< HEAD
-=======
     private projectService: ProjectService,
->>>>>>> origin/simrath-branch2
     public router: Router,
     private route: ActivatedRoute
   ) {}
@@ -80,8 +64,6 @@ export class AdminDashboardComponent implements OnInit {
     }
   }
 
-<<<<<<< HEAD
-=======
   async getTeams(): Promise<void> {
     if (this.selectedCompanyId) {
       try {
@@ -144,13 +126,10 @@ export class AdminDashboardComponent implements OnInit {
     } as ProjectDto;
   }
 
->>>>>>> origin/simrath-branch2
   private handleAnnouncementsResponse(announcements: AnnouncementDto[]): void {
     this.announcements = announcements;
   }
 
-<<<<<<< HEAD
-=======
   private handleTeamsResponse(teams: TeamDto[]): void {
     this.teams = teams;
   }
@@ -159,7 +138,6 @@ export class AdminDashboardComponent implements OnInit {
     this.projects = projects;
   }
 
->>>>>>> origin/simrath-branch2
   private handleError(message: string, error: any): void {
     console.error(message, error);
     this.errorMessage = message + '. Please try again later.';

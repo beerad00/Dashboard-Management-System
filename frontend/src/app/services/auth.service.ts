@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, throwError, tap } from 'rxjs';
+import { Observable, catchError, throwError, tap, BehaviorSubject } from 'rxjs';
 import { FullUserDto } from '../models/full-user.dto';
 import { CredentialsDto } from '../models/credentials.dto';
 import { UserRequestDto } from '../models/user-request.dto';
@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   private apiUrl = 'http://localhost:8080/users';
   private currentUser: FullUserDto | null = null;
+  private loggedIn = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -23,6 +24,7 @@ export class AuthService {
       throw new Error('Login failed');
     }
     this.currentUser = response;
+    this.loggedIn.next(true);
     return response;
   }
 
@@ -53,9 +55,14 @@ export class AuthService {
     // You can handle specific error scenarios here if needed
   }
 
+  get isLoggedIn(): Observable<boolean> {
+    return this.loggedIn.asObservable();
+  }
+
   async logout(): Promise<void> {
     this.currentUser = null;
     localStorage.removeItem('selectedCompanyId');
+    this.loggedIn.next(false);
     this.router.navigate(['/login']);
   }
 }

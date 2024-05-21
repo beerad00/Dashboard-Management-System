@@ -1,0 +1,39 @@
+<div class="mx-auto max-w-fit rounded-lg px-4 py-8">
+    <h1 class="text-2xl font-bold mb-4 text-center">User Registry</h1>
+    <div class="bg-white shadow-md rounded px-8 py-6">
+        <table class="w-full border-collapse">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2 text-center border">Name</th>
+                    <th class="px-4 py-2 text-center border">Email</th>
+                    <th class="px-4 py-2 text-center border">Active</th>
+                    <th class="px-4 py-2 text-center border">Admin</th>
+                    <th class="px-4 py-2 text-center border">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td class="px-4 py-2 text-center border">{{ user.profile.firstName }} {{ user.profile.lastName }}</td>
+                    <td class="px-4 py-2 text-center border">{{ user.profile.email }}</td>
+                    <td class="px-4 py-2 text-center border">
+                        <span class="{{ user.active ? 'text-green-500 font-semibold' : 'text-red-500 font-normal' }}">
+                            {{ user.active ? 'YES' : 'NO' }}
+                        </span>
+                    </td>
+                    <td class="px-4 py-2 text-center border">{{ user.admin ? 'YES' : 'NO' }}</td>
+                    <td class="px-4 py-2 text-center border">
+                        <span class="{{
+                            user.status === 'PENDING' ? 'text-yellow-500 font-semibold' : 
+                                (user.status === 'JOINED' ? 'text-green-500 font-semibold' : 'text-black font-normal')
+                            }}">
+                            {{ user.status }}
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button (click)="navigateToAddUser()" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded block mx-auto">
+            Add User
+        </button>
+    </div>
+</div>
