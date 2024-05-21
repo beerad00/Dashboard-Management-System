@@ -17,6 +17,7 @@ export class AddUserComponent implements OnInit {
     firstName: '',
     lastName: '',
     password: '',
+    phone: '',
     admin: false
   };
   confirmPassword: string = '';

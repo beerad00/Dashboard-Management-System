@@ -26,6 +26,7 @@ export class AuthService {
   }
 
   async register(userRequest: createUserDto): Promise<any> {
+    console.log('userRequest', userRequest);
     return this.http.post(`${this.apiUrl}/create`, userRequest).toPromise();
   }
 

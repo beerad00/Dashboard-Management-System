@@ -18,6 +18,7 @@ export class RegisterComponent implements OnInit {
     firstName: '',
     lastName: '',
     password: '',
+    phone: '',
     admin: false 
   };
   companyId: number | null = null;
