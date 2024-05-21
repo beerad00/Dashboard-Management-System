@@ -70,10 +70,13 @@ public class UserServiceImpl implements UserService {
         User newUser = new User();
         newUser.setAdmin(createUserDto.isAdmin());
         newUser.setActive(true);
+
         Optional<Company> associateCompany = companyRepository.findById(createUserDto.getCompanyId());
-        if(associateCompany.isPresent()){
-            Company company = associateCompany.get();
+        Company company = null;
+        if (associateCompany.isPresent()) {
+            company = associateCompany.get();
             newUser.getCompanies().add(company);
+            company.getEmployees().add(newUser);// Add the company to the user's list of companies
         }
 
         Profile newProfile = new Profile();
@@ -89,6 +92,7 @@ public class UserServiceImpl implements UserService {
         newUser.setProfile(newProfile);
         newUser.setCredentials(newCredentials);
         User savedUser = userRepository.saveAndFlush(newUser);
+        companyRepository.save(company);
 
 
         return fullUserMapper.entityToFullUserDto(savedUser);
