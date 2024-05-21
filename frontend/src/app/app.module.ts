@@ -18,7 +18,23 @@ import { CompanySelectComponent } from './company-select/company-select.componen
 import { CompanyService } from './services/company.service';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { EditProjectComponent } from './edit-project/edit-project.component';
+import { AnnouncementsComponent } from './announcements/announcements.component';
 
+
+
+
+const routes: Routes = [ 
+  { path: "announcements", component: AnnouncementsComponent},
+  { path: "edit-project", component: EditProjectComponent},
+  { path: "user-dashboard", component: UserDashboardComponent},
+  { path: "company-select", component: CompanySelectComponent},
+  { path: "add-user", component: AddUserComponent},
+  { path: "admin-dashboard", component: AdminDashboardComponent},
+  { path: "dashboard", component: DashboardComponent},
+  { path: "register", component: RegisterComponent},
+  { path: "login", component: LoginComponent},
+  { path: "", redirectTo: "/login", pathMatch: "full" },
+];
 
 @NgModule({
   declarations: [
@@ -29,15 +45,25 @@ import { EditProjectComponent } from './edit-project/edit-project.component';
     UserDashboardComponent, // Declare the new component
     CompanySelectComponent,
     AddUserComponent,
-    EditProjectComponent
+    EditProjectComponent,
+    AnnouncementsComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    RouterModule.forRoot(routes),
     HttpClientModule
   ],
   providers: [AuthService, CompanyService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+
+
+
+export class AppModule { 
+
+
+}

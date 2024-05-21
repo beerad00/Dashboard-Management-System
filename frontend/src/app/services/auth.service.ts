@@ -6,6 +6,7 @@ import { CredentialsDto } from '../models/credentials.dto';
 import { UserRequestDto } from '../models/user-request.dto';
 import { CompanyDto } from '../models/company.dto';
 import { createUserDto } from '../models/createUserDto';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
   private apiUrl = 'http://localhost:8080/users';
   private currentUser: FullUserDto | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   async login(credentials: CredentialsDto): Promise<FullUserDto> {
     const response = await this.http.post<FullUserDto>(`${this.apiUrl}/login`, credentials).toPromise();
@@ -50,5 +51,11 @@ export class AuthService {
   private handleError(error: any): void {
     console.error('An error occurred', error);
     // You can handle specific error scenarios here if needed
+  }
+
+  async logout(): Promise<void> {
+    this.currentUser = null;
+    localStorage.removeItem('selectedCompanyId');
+    this.router.navigate(['/login']);
   }
 }
