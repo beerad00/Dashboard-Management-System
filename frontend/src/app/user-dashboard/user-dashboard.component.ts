@@ -3,6 +3,8 @@ import { AuthService } from '../services/auth.service';
 import { CompanyService } from '../services/company.service';
 import { AnnouncementDto } from '../models/announcementDto';
 import { CompanyDto } from '../models/company.dto';
+import { TeamDto } from '../models/team.dto';
+import { ProjectDto } from '../models/projectDto';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -11,6 +13,8 @@ import { CompanyDto } from '../models/company.dto';
 })
 export class UserDashboardComponent implements OnInit {
   announcements: AnnouncementDto[] = [];
+  teams: TeamDto[] = [];
+  projects: ProjectDto[] = [];
   errorMessage: string = '';
 
   constructor(
@@ -22,44 +26,100 @@ export class UserDashboardComponent implements OnInit {
     // Initialization logic if needed
   }
 
-    async getAnnouncements(): Promise<void> {
-      const currentUser = this.authService.getCurrentUser();
-      if (currentUser) {
-        try {
-          const companies = await this.authService.getCompaniesByUserId(currentUser.id);
-          if (companies.length > 0) {
-            await this.handleCompaniesResponse(companies);
+  async getAnnouncements(): Promise<void> {
+    const currentUser = this.authService.getCurrentUser();
+    if (currentUser) {
+      try {
+        const companies = await this.authService.getCompaniesByUserId(currentUser.id);
+        if (companies.length > 0) {
+          await this.handleCompaniesResponse(companies);
+        } else {
+          this.errorMessage = 'No company found for the current user.';
+        }
+      } catch (error) {
+        this.handleError('Failed to fetch companies', error);
+      }
+    } else {
+      this.errorMessage = 'User is not logged in.';
+    }
+  }
+
+  async getTeams(): Promise<void> {
+    const currentUser = this.authService.getCurrentUser();
+    if (currentUser) {
+      try {
+        const companies = await this.authService.getCompaniesByUserId(currentUser.id);
+        if (companies.length > 0) {
+          const companyId = companies[0]?.id;
+          if (companyId) {
+            const teams = await this.companyService.getTeamsByCompanyId(companyId);
+            this.handleTeamsResponse(teams);
           } else {
             this.errorMessage = 'No company found for the current user.';
           }
-        } catch (error) {
-          this.handleError('Failed to fetch companies', error);
+        } else {
+          this.errorMessage = 'No company found for the current user.';
         }
-      } else {
-        this.errorMessage = 'User is not logged in.';
+      } catch (error) {
+        this.handleError('Failed to fetch companies', error);
       }
-    }
-  
-    private async handleCompaniesResponse(companies: CompanyDto[]): Promise<void> {
-      const companyId = companies[0]?.id;
-      if (companyId) {
-        try {
-          const announcements = await this.companyService.getAnnouncementsByCompanyId(companyId);
-          this.handleAnnouncementsResponse(announcements);
-        } catch (error) {
-          this.handleError('Failed to fetch announcements', error);
-        }
-      } else {
-        this.errorMessage = 'No company found for the current user.';
-      }
-    }
-  
-    private handleAnnouncementsResponse(announcements: AnnouncementDto[]): void {
-      this.announcements = announcements;
-    }
-  
-    private handleError(message: string, error: any): void {
-      console.error(message, error);
-      this.errorMessage = message + '. Please try again later.';
+    } else {
+      this.errorMessage = 'User is not logged in.';
     }
   }
+
+  async getProjects(teamId: number): Promise<void> {
+    const currentUser = this.authService.getCurrentUser();
+    if (currentUser) {
+      try {
+        const companies = await this.authService.getCompaniesByUserId(currentUser.id);
+        if (companies.length > 0) {
+          const companyId = companies[0]?.id;
+          if (companyId) {
+            const projects = await this.companyService.getProjectsByTeamId(companyId, teamId);
+            this.handleProjectsResponse(projects);
+          } else {
+            this.errorMessage = 'No company found for the current user.';
+          }
+        } else {
+          this.errorMessage = 'No company found for the current user.';
+        }
+      } catch (error) {
+        this.handleError('Failed to fetch companies', error);
+      }
+    } else {
+      this.errorMessage = 'User is not logged in.';
+    }
+  }
+
+  private async handleCompaniesResponse(companies: CompanyDto[]): Promise<void> {
+    const companyId = companies[0]?.id;
+    if (companyId) {
+      try {
+        const announcements = await this.companyService.getAnnouncementsByCompanyId(companyId);
+        this.handleAnnouncementsResponse(announcements);
+      } catch (error) {
+        this.handleError('Failed to fetch announcements', error);
+      }
+    } else {
+      this.errorMessage = 'No company found for the current user.';
+    }
+  }
+
+  private handleAnnouncementsResponse(announcements: AnnouncementDto[]): void {
+    this.announcements = announcements;
+  }
+
+  private handleTeamsResponse(teams: TeamDto[]): void {
+    this.teams = teams;
+  }
+
+  private handleProjectsResponse(projects: ProjectDto[]): void {
+    this.projects = projects;
+  }
+
+  private handleError(message: string, error: any): void {
+    console.error(message, error);
+    this.errorMessage = message + '. Please try again later.';
+  }
+}
