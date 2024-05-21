@@ -15,15 +15,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { TeamsComponent } from './teams/teams.component';
 import { CompanyComponent } from './company/company.component';
-
-
-const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'admin-dashboard', component: AdminDashboardComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
-];
+import { UserRegistryComponent } from './user-registry/user-registry.component';
+import { CompanySelectComponent } from './company-select/company-select.component';
+import { CompanyService } from './services/company.service';
 
 @NgModule({
   declarations: [
@@ -31,9 +25,9 @@ const routes: Routes = [
     TeamsComponent,
     LoginComponent,
     RegisterComponent,
-    AddUserComponent,
     AdminDashboardComponent,
-    DashboardComponent,
+    CompanySelectComponent,
+    AddUserComponent,
     CompanyComponent
   ],
   imports: [
@@ -42,7 +36,7 @@ const routes: Routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [AuthService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

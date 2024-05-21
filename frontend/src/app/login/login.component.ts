@@ -10,35 +10,30 @@ import { FullUserDto } from '../models/full-user.dto';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  credentials: CredentialsDto = { username: '', email: '', password: '' };
-  errorMessage = '';
+  credentials: CredentialsDto = {
+    username: '',
+    password: ''
+  };
+
+  errorMessage: string = '';
   currentUser: any;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit() {
     this.authService.login(this.credentials).subscribe({
-      next: (response: FullUserDto) => {
+      next: (response) => {
         console.log('Login response:', response);
-        this.currentUser = response;
-        this.setUser();
-        if (response) {
-          this.router.navigate(['/company-select']);
-          /*
-          if (response.admin) {
-            this.router.navigate(['/admin-dashboard']);
-          } else {
-            this.router.navigate(['/dashboard']);
-          }
-          */
+        if (response && response.profile) {
+          this.router.navigate(['/select-company']); // Redirect to company selection page
         } else {
           console.error('Unexpected response structure:', response);
           this.errorMessage = 'Unexpected response structure.';
         }
       },
-      error: error => {
+      error: (error) => {
         console.error('Login failed', error);
-        this.errorMessage = 'Login failed. Please check your credentials.';
+        this.errorMessage = 'Login failed. Please check your credentials and try again.';
       }
     });
   }

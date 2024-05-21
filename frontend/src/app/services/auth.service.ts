@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError, tap } from 'rxjs';
 import { FullUserDto } from '../models/full-user.dto';
 import { CredentialsDto } from '../models/credentials.dto';
 import { UserRequestDto } from '../models/user-request.dto';
-import { catchError } from 'rxjs';
-import { throwError } from 'rxjs';
-import { tap } from 'rxjs';
+import { CompanyDto } from '../models/company.dto';
+import { createUserDto } from '../models/createUserDto';
 
 @Injectable({
-    providedIn: 'root'
-  })
-  export class AuthService {
+  providedIn: 'root'
+})
+export class AuthService {
     private apiUrl = 'http://localhost:8080/users';
     private currentUser: FullUserDto | null = null;
   
@@ -25,8 +24,8 @@ import { tap } from 'rxjs';
         );
     }
   
-    register(userRequest: UserRequestDto): Observable<any> {
-      return this.http.post(`${this.apiUrl}/new`, userRequest)
+    register(userRequest: createUserDto): Observable<any> {
+      return this.http.post(`${this.apiUrl}/create`, userRequest)
         .pipe(catchError(this.handleError));
     }
   
