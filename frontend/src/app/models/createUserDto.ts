@@ -5,5 +5,6 @@ export interface createUserDto {
     firstName: string;
     lastName: string;
     password: string;
+    phone: string;
     admin: boolean; // This was previously added
   }

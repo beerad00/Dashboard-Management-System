@@ -11,39 +11,44 @@ import { createUserDto } from '../models/createUserDto';
   providedIn: 'root'
 })
 export class AuthService {
-    private apiUrl = 'http://localhost:8080/users';
-    private currentUser: FullUserDto | null = null;
-  
-    constructor(private http: HttpClient) {}
-  
-    login(credentials: CredentialsDto): Observable<FullUserDto> {
-      return this.http.post<FullUserDto>(`${this.apiUrl}/login`, credentials)
-        .pipe(
-          tap((user: FullUserDto) => this.currentUser = user),
-          catchError(this.handleError)
-        );
-    }
-  
-    register(userRequest: createUserDto): Observable<any> {
-      return this.http.post(`${this.apiUrl}/create`, userRequest)
-        .pipe(catchError(this.handleError));
-    }
-  
-    getCurrentUser(): FullUserDto | null {
-      return this.currentUser;
-    }
-  
-    private handleError(error: any) {
-      console.error('An error occurred', error);
-      return throwError(() => new Error('Something went wrong; please try again later.'));
-    }
+  private apiUrl = 'http://localhost:8080/users';
+  private currentUser: FullUserDto | null = null;
 
-    getUserCompanies() {
-      const userId = localStorage.getItem('currentUser')
-      console.log(userId);
-  
-      console.log(`${this.apiUrl}/${userId}/companies`);
-      console.log(JSON.stringify(this.http.get(`${this.apiUrl}/${userId}/companies`)))
-      return this.http.get(`${this.apiUrl}/${userId}/companies`);
+  constructor(private http: HttpClient) {}
+
+  async login(credentials: CredentialsDto): Promise<FullUserDto> {
+    const response = await this.http.post<FullUserDto>(`${this.apiUrl}/login`, credentials).toPromise();
+    if (!response) {
+      throw new Error('Login failed');
+    }
+    this.currentUser = response;
+    return response;
+  }
+
+  async register(userRequest: createUserDto): Promise<any> {
+    console.log('userRequest', userRequest);
+    return this.http.post(`${this.apiUrl}/create`, userRequest).toPromise();
+  }
+
+  getCurrentUser(): FullUserDto | null {
+    return this.currentUser;
+  }
+
+  async getCompaniesByUserId(userId: number): Promise<CompanyDto[]> {
+    try {
+      const response = await this.http.get<CompanyDto[]>(`${this.apiUrl}/${userId}/companies`).toPromise();
+      if (!response) {
+        throw new Error('No companies found');
+      }
+      return response;
+    } catch (error) {
+      this.handleError(error);
+      return [];
     }
   }
+
+  private handleError(error: any): void {
+    console.error('An error occurred', error);
+    // You can handle specific error scenarios here if needed
+  }
+}

@@ -20,22 +20,24 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onSubmit() {
-    this.authService.login(this.credentials).subscribe({
-      next: (response) => {
-        console.log('Login response:', response);
-        if (response && response.profile) {
-          this.router.navigate(['/select-company']); // Redirect to company selection page
+  async onSubmit(): Promise<void> {
+    try {
+      const response = await this.authService.login(this.credentials);
+      console.log('Login response:', response);
+      if (response && response.profile) {
+        if (response.admin) {
+          this.router.navigate(['/select-company']); // Redirect to company selection page for admins
         } else {
-          console.error('Unexpected response structure:', response);
-          this.errorMessage = 'Unexpected response structure.';
+          this.router.navigate(['/user-dashboard']); // Redirect to user dashboard for non-admins
         }
-      },
-      error: (error) => {
-        console.error('Login failed', error);
-        this.errorMessage = 'Login failed. Please check your credentials and try again.';
+      } else {
+        console.error('Unexpected response structure:', response);
+        this.errorMessage = 'Unexpected response structure.';
       }
-    });
+    } catch (error) {
+      console.error('Login failed', error);
+      this.errorMessage = 'Login failed. Please check your credentials and try again.';
+    }
   }
 
   setUser() {

@@ -18,6 +18,7 @@ export class RegisterComponent implements OnInit {
     firstName: '',
     lastName: '',
     password: '',
+    phone: '',
     admin: false 
   };
   companyId: number | null = null;
@@ -34,16 +35,14 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.companyId) {
-      this.authService.register(this.userRequest).subscribe({
-        next: () => {
-          this.router.navigate(['/login']);
-        },
-        error: (error) => {
-          console.error('Registration failed', error);
-        }
-      });
+      try {
+        await this.authService.register(this.userRequest);
+        this.router.navigate(['/login']);
+      } catch (error) {
+        console.error('Registration failed', error);
+      }
     } else {
       console.error('No company ID selected');
     }
