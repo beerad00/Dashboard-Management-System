@@ -17,6 +17,7 @@ import { UserRegistryComponent } from './user-registry/user-registry.component';
 import { CompanySelectComponent } from './company-select/company-select.component';
 import { CompanyService } from './services/company.service';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { EditProjectComponent } from './edit-project/edit-project.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
     AdminDashboardComponent,
     UserDashboardComponent, // Declare the new component
     CompanySelectComponent,
-    AddUserComponent
+    AddUserComponent,
+    EditProjectComponent
   ],
   imports: [
     BrowserModule,

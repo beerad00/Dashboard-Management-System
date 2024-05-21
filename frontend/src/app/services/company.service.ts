@@ -4,6 +4,8 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { FullUserDto } from '../models/full-user.dto';
 import { CompanyDto } from '../models/company.dto';
 import { AnnouncementDto } from '../models/announcementDto';
+import { TeamDto } from '../models/team.dto';
+import { ProjectDto } from '../models/projectDto';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +39,45 @@ export class CompanyService {
     } catch (error) {
       this.handleError(error);
       return [];
+    }
+  }
+
+  async getTeamsByCompanyId(companyId: number): Promise<TeamDto[]> {
+    try {
+      const response = await this.http.get<TeamDto[]>(`${this.apiUrl}/${companyId}/teams`).toPromise();
+      if (!response) {
+        throw new Error('No teams found');
+      }
+      return response;
+    } catch (error) {
+      this.handleError(error);
+      return [];
+    }
+  }
+
+  async getProjectsByTeamId(companyId: number, teamId: number): Promise<ProjectDto[]> {
+    try {
+      const response = await this.http.get<ProjectDto[]>(`${this.apiUrl}/${companyId}/teams/${teamId}/projects`).toPromise();
+      if (!response) {
+        throw new Error('No projects found');
+      }
+      return response;
+    } catch (error) {
+      this.handleError(error);
+      return [];
+    }
+  }
+
+  async updateProject(project: ProjectDto): Promise<ProjectDto> {
+    try {
+      const response = await this.http.put<ProjectDto>(`${this.apiUrl}/projects/${project.id}`, project).toPromise();
+      if (!response) {
+        throw new Error('Failed to update project');
+      }
+      return response;
+    } catch (error) {
+      this.handleError(error);
+      return {} as ProjectDto;
     }
   }
 
