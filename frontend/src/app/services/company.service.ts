@@ -68,6 +68,19 @@ export class CompanyService {
     }
   }
 
+  async updateProject(project: ProjectDto): Promise<ProjectDto> {
+    try {
+      const response = await this.http.put<ProjectDto>(`${this.apiUrl}/projects/${project.id}`, project).toPromise();
+      if (!response) {
+        throw new Error('Failed to update project');
+      }
+      return response;
+    } catch (error) {
+      this.handleError(error);
+      return {} as ProjectDto;
+    }
+  }
+
   private handleError(error: any): void {
     console.error('An error occurred', error);
     // You can handle specific error scenarios here if needed

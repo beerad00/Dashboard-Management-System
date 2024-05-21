@@ -1,0 +1,14 @@
+<div class="edit-project-container">
+    <div class="edit-project-box">
+      <h2>Edit Project</h2>
+      <label for="name">Project Name</label>
+      <input type="text" id="name" [(ngModel)]="project.name" required>
+      
+      <label for="description">Description</label>
+      <input type="text" id="description" [(ngModel)]="project.description" required>
+      
+      <button (click)="onSave()">Save</button>
+      <button (click)="onCancel()">Cancel</button>
+    </div>
+  </div>
+  

@@ -5,5 +5,5 @@ export interface ProjectDto {
   name: string;
   description: string;
   active: boolean;
-  team: TeamDto;
+  team: TeamDto | null;
 }

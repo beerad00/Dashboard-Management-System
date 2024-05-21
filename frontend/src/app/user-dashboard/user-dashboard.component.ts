@@ -15,10 +15,11 @@ export class UserDashboardComponent implements OnInit {
   announcements: AnnouncementDto[] = [];
   teams: TeamDto[] = [];
   projects: ProjectDto[] = [];
+  selectedProject: ProjectDto | null = null;
   errorMessage: string = '';
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private companyService: CompanyService
   ) {}
 
@@ -90,6 +91,33 @@ export class UserDashboardComponent implements OnInit {
     } else {
       this.errorMessage = 'User is not logged in.';
     }
+  }
+
+  onEditProject(project: ProjectDto) {
+    this.selectedProject = project;
+  }
+
+  onSaveProject(updatedProject: ProjectDto) {
+    // Update the project in the projects array
+    const index = this.projects.findIndex(p => p.id === updatedProject.id);
+    if (index !== -1) {
+      this.projects[index] = updatedProject;
+    }
+    this.selectedProject = null;
+  }
+
+  onCancelEdit() {
+    this.selectedProject = null;
+  }
+
+  onCreateProject() {
+    this.selectedProject = {
+      id: 0,
+      name: '',
+      description: '',
+      active: true,
+      team: null
+    } as ProjectDto;
   }
 
   private async handleCompaniesResponse(companies: CompanyDto[]): Promise<void> {
