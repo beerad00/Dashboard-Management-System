@@ -7,5 +7,5 @@
         {{ member.profile.firstName }} {{ member.profile.lastName }}<span *ngIf="i < team.teammates.length - 1">, </span>
       </span>
     </p>
-    <button class="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600 transition-colors duration-300 ease-in-out" (click)="onGetProjectsClick(team.id)">Get Projects</button>
+    <button class="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600 transition-colors duration-300 ease-in-out" (click)="this.getProjectsButton(team.id)">Get Projects</button>
   </div>

@@ -37,21 +37,15 @@ export class ProjectsComponent {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.teamId = +params['teamId'] || null;
-      if (this.teamId !== null) {
-        this.getProjectsByTeamId(this.teamId);
-      } else {
-        this.errorMessage = 'No team selected.';
-      }
-    });
-
-
-    this.currentUser = this.authService.getCurrentUser();
-    console.log(this.currentUser);
+      const teamId = +params['teamId']; // Convert to number
+      // Now you have the team ID, you can use it to fetch the projects associated with that team
+      console.log('Team ID:', teamId);
+      this.teamId = teamId;
+      // Fetch projects based on teamId
+  })
     this.selectedCompanyId = Number(localStorage.getItem('selectedCompanyId'));
-    console.log(this.selectedCompanyId);
-    console.log(this.teamId, "team id");
     this.getProjectsByTeamId(this.teamId!);
+    console.log(this.selectedCompanyId, this.teamId, "I pressed projects!");
 
   }
 

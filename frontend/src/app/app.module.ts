@@ -40,6 +40,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent},
   { path: "teams", component: TeamsComponent},
   { path: "projects", component: ProjectsComponent},
+  { path: 'projects/:teamId', component: ProjectsComponent },
   { path: "users", component: UsersComponent},
   { path: "", redirectTo: "/login", pathMatch: "full" },
 ];
@@ -69,6 +70,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     HttpClientModule
   ],
+  exports: [RouterModule],
   providers: [AuthService, CompanyService],
   bootstrap: [AppComponent]
 })

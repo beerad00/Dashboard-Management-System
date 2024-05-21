@@ -49,7 +49,6 @@ export class TeamsComponent {
       try {
         const teams = await this.companyService.getTeamsByCompanyId(this.selectedCompanyId);
         this.handleTeamsResponse(teams);
-        console.log(teams, "teams available")
       } catch (error) {
         this.handleError('Failed to fetch teams', error);
       }
@@ -81,6 +80,7 @@ export class TeamsComponent {
 
   private handleTeamsResponse(teams: TeamDto[]): void {
     this.teams = teams;
+    console.log("Teams available!", this.teams);
   }
 
   private handleProjectsResponse(projects: ProjectDto[]): void {
