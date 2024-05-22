@@ -1,3 +1,20 @@
+
+<div *ngIf="projects.length === 0 || projects === null" class="p-4">
+  <h2 class="text-3xl font-bold mb-6 text-center">Projects</h2>
+  <h1>No projects found!</h1>
+  <div class="project-card p-6 border rounded-lg shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out items-center justify-center text-center" (click)="this.onCreateProject()">
+
+    <button class="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600 transition-colors duration-300 ease-in-out" (click)="this.onCreateProject()">Add Project!</button>
+</div>
+<app-edit-project 
+*ngIf="selectedProject"
+[project]="selectedProject"
+(save)="onSaveProject($event)"
+(cancel)="onCancelEdit()">
+</app-edit-project>
+</div>
+
+
 <div *ngIf="projects.length > 0" class="p-4">
   <h2 class="text-3xl font-bold mb-6 text-center">Projects</h2>
   <button class="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600 transition-colors duration-300 ease-in-out" (click)="this.onCreateProject()">Add Project</button>

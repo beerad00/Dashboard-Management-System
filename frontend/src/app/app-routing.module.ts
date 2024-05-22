@@ -7,7 +7,7 @@ import { AddUserComponent } from './users/add-user/add-user.component';
 import { UserRegistryComponent } from './user-registry/user-registry.component';
 import { CompanySelectComponent } from './company-select/company-select.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
-import { AddTeamComponent } from './add-team/add-team.component';
+import { AddTeamComponent } from './teams/add-team/add-team.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },

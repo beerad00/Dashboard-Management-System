@@ -89,5 +89,9 @@ export class TeamsComponent {
     this.router.navigate(['/projects']);
   }
 
+  addTeam(){
+    this.router.navigate(['/add-team']);
+  }
+
 
 }

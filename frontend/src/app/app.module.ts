@@ -13,6 +13,7 @@ import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AddUserComponent } from './users/add-user/add-user.component';
+import { UserRegistryComponent } from './user-registry/user-registry.component';
 import { CompanySelectComponent } from './company-select/company-select.component';
 import { CompanyService } from './services/company.service';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
@@ -23,6 +24,9 @@ import { ProjectsComponent } from './teams/projects/projects.component';
 import { UsersComponent } from './users/users.component';
 import { AnnouncementCardComponent } from './announcements/announcement-card/announcement-card.component';
 import { TeamCardComponent } from './teams/team-card/team-card.component';
+import { AddTeamComponent } from './teams/add-team/add-team.component';
+
+
 
 
 
@@ -50,6 +54,8 @@ const routes: Routes = [
     RegisterComponent,
     AdminDashboardComponent,
     UserDashboardComponent,
+    CompanySelectComponent,
+    AddUserComponent,
     EditProjectComponent,
     AnnouncementsComponent,
     NavbarComponent,
@@ -58,7 +64,7 @@ const routes: Routes = [
     UsersComponent,
     AnnouncementCardComponent,
     TeamCardComponent,
-    AddUserComponent
+    AddTeamComponent
   ],
   imports: [
     BrowserModule,
@@ -71,8 +77,4 @@ const routes: Routes = [
   providers: [AuthService, CompanyService],
   bootstrap: [AppComponent]
 })
-
-
-
-
-export class AppModule {}
+export class AppModule { }

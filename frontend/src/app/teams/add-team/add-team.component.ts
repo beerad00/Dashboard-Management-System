@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { TeamDto } from '../models/team.dto';
-import { FullUserDto } from '../models/full-user.dto';
+import { TeamDto } from '../../models/team.dto';
+import { FullUserDto } from '../../models/full-user.dto';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { TeamService } from '../services/team.service';
-import { CompanyService } from '../services/company.service';
+import { TeamService } from '../../services/team.service';
+import { CompanyService } from '../../services/company.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-add-team',
@@ -18,26 +19,43 @@ export class AddTeamComponent {
     description: '',
     teammates: []
   };
-  companyId: number = 7;
+  companyId: number | null = null;
   companyEmployees: FullUserDto[] = [];
 
   constructor(private http: HttpClient,
               private router: Router,
               private teamService: TeamService,
+              private authService: AuthService,
               private companyService: CompanyService) {}
 
   ngOnInit(): void{
+    this.companyId = this.authService.getCurrentCompanyId();
     this.getCompanyEmployees();
   }
 
   async getCompanyEmployees() {
-    this.companyEmployees = await this.companyService.getUsersByCompanyId(this.companyId); 
+    if(this.companyId){
+      try {
+        this.companyEmployees = await this.companyService.getUsersByCompanyId(this.companyId);
+      } catch (error) {
+        console.error('Failed to load users', error);
+    }
   }
+}
 
   onSubmit() {
+    if(this.companyId){
+      try {
     console.log(this.teamRequest.teammates);
     this.teamService.createTeam(this.teamRequest, this.companyId);
-    this.router.navigate(['/admin-dashboard']);
+    this.router.navigate(['/teams']);
+      } catch (error) {
+        console.error('Failed to load users', error);
+      }
+    }
   }
-
+  
 }
+
+
+
