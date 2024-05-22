@@ -1,0 +1,56 @@
+<div class="admin-dashboard">
+  <h1>Welcome to the admin dashboard!</h1>
+  <button (click)="onAddUser()">Create User</button>
+
+  <div *ngIf="users.length > 0">
+    <h2>Users</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Active</th>
+          <th>Admin</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.profile.firstName }} {{ user.profile.lastName }}</td>
+          <td>{{ user.profile.email }}</td>
+          <td>{{ user.active ? 'YES' : 'NO' }}</td>
+          <td>{{ user.admin ? 'YES' : 'NO' }}</td>
+          <td>{{ user.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <button (click)="getAnnouncements()">Get Announcements</button>
+
+<app-announcements></app-announcements>
+
+  
+
+  <div *ngIf="projects.length > 0">
+    <h2>Projects</h2>
+    <ul>
+      <li *ngFor="let project of projects">
+        <h3>{{ project.name }}</h3>
+        <p>{{ project.description }}</p>
+        <p>Status: {{ project.active ? 'Active' : 'Inactive' }}</p>
+        <button (click)="onEditProject(project)">Edit</button>
+      </li>
+    </ul>
+    <button (click)="onCreateProject()">Create New Project</button>
+  </div>
+  
+  <app-edit-project 
+    *ngIf="selectedProject"
+    [project]="selectedProject"
+    (save)="onSaveProject($event)"
+    (cancel)="onCancelEdit()">
+  </app-edit-project>
+
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+</div>

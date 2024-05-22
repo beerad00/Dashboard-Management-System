@@ -1,0 +1,38 @@
+<div class="add-user-container">
+  <div class="add-user-box">
+    <h1 class="text-2xl text-center" >Add User</h1>
+    <form (ngSubmit)="onSubmit()" class="form">
+      <label for="username">Username</label>
+      <input class="form-group input" type="text" id="username" [(ngModel)]="userRequest.username" name="username" required>
+
+      <label for="email">Email</label>
+      <input class="form-group input" type="email" id="email" [(ngModel)]="userRequest.email" name="email" required>
+
+      <label for="firstName">First Name</label>
+      <input class="form-group input" type="text" id="firstName" [(ngModel)]="userRequest.firstName" name="firstName" required>
+
+      <label for="lastName">Last Name</label>
+      <input class="form-group input" type="text" id="lastName" [(ngModel)]="userRequest.lastName" name="lastName" required>
+
+      <label for="phone">Phone</label>
+      <input class="form-group input" type="text" id="phone" [(ngModel)]="userRequest.phone" name="phone" required>
+
+      <label for="password">Password</label>
+      <input class="form-group input" type="password" id="password" [(ngModel)]="userRequest.password" name="password" required>
+
+      
+
+      <label for="confirmPassword">Confirm Password</label>
+      <input class="form-group input" type="password" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" required>
+
+      <label for="admin">Make user an admin role?</label>
+      <select id="admin" [(ngModel)]="userRequest.admin" name="admin">
+        <option [ngValue]="true">true</option>
+        <option [ngValue]="false">false</option>
+      </select>
+
+      <button type="submit">Submit</button>
+      <button (click)="this.navigateToUsers()" type="submit">Cancel</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="register-container">
+    <div class="register-box">
+      <h1>COOK SYSTEMS</h1>
+      <h2>A FINAL APP</h2>
+      <form (ngSubmit)="onSubmit()">
+        <label for="username">Username</label>
+        <input type="text" id="username" [(ngModel)]="userRequest.username" name="username" required>
+  
+        <label for="email">Email</label>
+        <input type="email" id="email" [(ngModel)]="userRequest.email" name="email" required>
+        
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" [(ngModel)]="userRequest.firstName" name="firstName" required>
+        
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" [(ngModel)]="userRequest.lastName" name="lastName" required>
+
+        <label for="phone">Phone</label>
+      <input type="text" id="phone" [(ngModel)]="userRequest.phone" name="password" required>
+        
+        <label for="password">Password</label>
+        <input type="password" id="password" [(ngModel)]="userRequest.password" name="password" required>
+        
+        <button class="button" type="submit">Register</button>
+      </form>
+    </div>
+  </div>
