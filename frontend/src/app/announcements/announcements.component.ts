@@ -29,8 +29,8 @@ export class AnnouncementsComponent {
   ngOnInit(): void {
     this.currentUser = this.authService.getCurrentUser();
     console.log(this.currentUser);
-    this.selectedCompanyId = Number(localStorage.getItem('selectedCompanyId'));
-    console.log(this.selectedCompanyId);
+    this.selectedCompanyId = this.authService.getCurrentCompanyId();
+    console.log(this.selectedCompanyId, "GLOBAL COMPANY ID IN ANNOUNCEMENTS");
 
     this.getAnnouncements();
   }

@@ -69,7 +69,7 @@ export class ProjectsComponent {
   async onSaveProject(updatedProject: ProjectDto) {
     try {
       if (updatedProject.id === 0) {
-        const newProject = await this.projectService.createProject(updatedProject, this.selectedTeamId!);
+        const newProject = await this.projectService.createProject(updatedProject, this.teamId!);
         this.projects.push(newProject);
       } else {
         const updated = await this.projectService.updateProject(updatedProject);
@@ -94,8 +94,9 @@ export class ProjectsComponent {
       name: '',
       description: '',
       active: true,
-      team: this.selectedTeamId ? { id: this.selectedTeamId } : null
+      team: this.teamId ? { id: this.teamId } : null
     } as ProjectDto;
+    console.log(this.selectedProject);
   }
 
   private handleError(message: string, error: any): void {

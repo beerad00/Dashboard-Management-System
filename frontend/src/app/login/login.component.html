@@ -4,10 +4,10 @@
       <h2>A FINAL APP</h2>
       <form (ngSubmit)="onSubmit()">
         <label for="username">Username</label>
-        <input type="text" id="username" [(ngModel)]="credentials.username" name="username" required>
+        <input class="text-black" type="text" id="username" [(ngModel)]="credentials.username" name="username" required>
         
         <label for="password">Password</label>
-        <input type="password" id="password" [(ngModel)]="credentials.password" name="password" required>
+        <input class="text-black" type="password" id="password" [(ngModel)]="credentials.password" name="password" required>
         
         <button class="button" type="submit">Login</button>
       </form>

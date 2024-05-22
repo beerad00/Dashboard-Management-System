@@ -33,7 +33,9 @@ export class CompanySelectComponent implements OnInit {
 
   onSelectCompany() {
     if (this.selectedCompanyId) {
+      console.log('Selected company from company-select:', this.selectedCompanyId);
       localStorage.setItem('selectedCompanyId', this.selectedCompanyId.toString());
+      this.authService.setCurrentCompanyId(this.selectedCompanyId);
       this.router.navigate(['/announcements'], { queryParams: { companyId: this.selectedCompanyId } });
     }
   }

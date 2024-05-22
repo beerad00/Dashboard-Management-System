@@ -15,6 +15,7 @@ export class AuthService {
   private apiUrl = 'http://localhost:8080/users';
   private currentUser: FullUserDto | null = null;
   private loggedIn = new BehaviorSubject<boolean>(false);
+  private companyId = new BehaviorSubject<number | null>(null);
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -24,7 +25,6 @@ export class AuthService {
       throw new Error('Login failed');
     }
     this.currentUser = response;
-    this.loggedIn.next(true);
     return response;
   }
 
@@ -36,6 +36,19 @@ export class AuthService {
   getCurrentUser(): FullUserDto | null {
     return this.currentUser;
   }
+
+  setCurrentCompanyId(companyId: number): void {
+    this.companyId.next(companyId);
+    console.log(this.companyId.getValue(), 'company id from SETCURRENTCOMPANYID IN AUTHSERVICE')
+    this.loggedIn.next(true);
+  };
+
+
+  getCurrentCompanyId(): number | null {
+    return this.companyId.getValue();
+  }
+
+
 
   async getCompaniesByUserId(userId: number): Promise<CompanyDto[]> {
     try {
@@ -63,6 +76,7 @@ export class AuthService {
     this.currentUser = null;
     localStorage.removeItem('selectedCompanyId');
     this.loggedIn.next(false);
+    this.setCurrentCompanyId(0);
     this.router.navigate(['/login']);
   }
 }

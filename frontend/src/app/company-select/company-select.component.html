@@ -1,11 +1,13 @@
-<div class="flex flex-col justify-center items-center m-auto">
-    <h1 class="text-4xl font-bold underline" >Select Company</h1>
-    <form class="flex flex-col justify-evenly items-center" (ngSubmit)="onSelectCompany()">
-      <label class="" for="company">Company</label>
-      <select id="company" [(ngModel)]="selectedCompanyId" name="company" required>
-        <option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</option>
-      </select>
-      <button class="button" type="submit">Select Company</button>
-    </form>
+<div class="login-container">
+    <div class="login-box">
+      <h1 class="text-4xl font-bold underline" >Select Company</h1>
+      <form class="flex flex-col justify-evenly items-center" (ngSubmit)="onSelectCompany()">
+        <label class="" for="company">Company</label>
+        <select class="bg-sky-200 w-48 p-4 m-8" id="company" [(ngModel)]="selectedCompanyId" name="company" required>
+          <option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</option>
+        </select>
+        <button class="button" type="submit">Select Company</button>
+      </form>
+    </div>
   </div>
   
