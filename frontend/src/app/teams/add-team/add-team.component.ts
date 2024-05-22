@@ -66,7 +66,11 @@ export class AddTeamComponent {
       }
     }
   }
-  
+
+  onCancel() {
+    this.router.navigate(['/teams']);
+  }
+
 }
 
 
