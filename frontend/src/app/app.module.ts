@@ -21,6 +21,7 @@ import { AnnouncementCardComponent } from './announcements/announcement-card/ann
 import { TeamCardComponent } from './teams/team-card/team-card.component';
 import { AddTeamComponent } from './teams/add-team/add-team.component';
 import { AddProjectComponent } from './teams/projects/add-project/add-project.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 
@@ -37,6 +38,8 @@ const routes: Routes = [
   { path: 'projects/:teamId', component: ProjectsComponent },
   { path: "users", component: UsersComponent},
   { path: "", redirectTo: "/login", pathMatch: "full" },
+  { path: '**', component: PageNotFoundComponent },
+
 ];
 
 @NgModule({
@@ -54,7 +57,8 @@ const routes: Routes = [
     AnnouncementCardComponent,
     TeamCardComponent,
     AddTeamComponent,
-    AddProjectComponent
+    AddProjectComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

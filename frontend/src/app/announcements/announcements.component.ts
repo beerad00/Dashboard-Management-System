@@ -31,10 +31,7 @@ export class AnnouncementsComponent {
     if(!this.currentUser){
       this.router.navigate(['/login']);
     }
-    console.log(this.currentUser);
     this.selectedCompanyId = this.authService.getCurrentCompanyId();
-    console.log(this.selectedCompanyId, "GLOBAL COMPANY ID IN ANNOUNCEMENTS");
-
     this.getAnnouncements();
   }
 
@@ -50,7 +47,6 @@ export class AnnouncementsComponent {
 
   async getAnnouncements(): Promise<void> {
     if (this.selectedCompanyId) {
-      console.log(this.selectedCompanyId);
       try {
         const announcements = await this.companyService.getAnnouncementsByCompanyId(this.selectedCompanyId);
         this.handleAnnouncementsResponse(announcements);

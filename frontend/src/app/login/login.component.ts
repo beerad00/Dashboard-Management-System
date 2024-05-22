@@ -19,18 +19,18 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  ngOnInit(): void {
+    this.authService.logout();
+  }
+
   async onSubmit(): Promise<void> {
     try {
       const response = await this.authService.login(this.credentials);
-      console.log('Login response:', response);
       if (response) {
-        console.log("loging successful")
         if (response.admin) {
-          console.log("admin")
           this.router.navigate(['/company-select']); // Redirect to company selection page for admins
         } else {
           this.authService.setCurrentCompanyId(response.companies[0].id);
-          console.log(this.authService.getCurrentUser());
           this.router.navigate(['/announcements']); // Redirect to user dashboard for non-admins
         }
       } else {

@@ -17,6 +17,7 @@ export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false);
   private adminStatus = new BehaviorSubject<boolean>(false);
   private companyId = new BehaviorSubject<number | null>(null);
+  private companySelected = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -43,8 +44,8 @@ export class AuthService {
 
   setCurrentCompanyId(companyId: number): void {
     this.companyId.next(companyId);
-    console.log(this.companyId.getValue(), 'company id from SETCURRENTCOMPANYID IN AUTHSERVICE')
     this.loggedIn.next(true);
+    this.companySelected.next(true);
   };
 
 
@@ -76,15 +77,21 @@ export class AuthService {
     return this.loggedIn.asObservable();
   }
 
+  get hasCompanyId(): Observable<boolean> {
+    return this.companySelected.asObservable();
+  }
+
   get isAdmin(): Observable<boolean> {
     return this.adminStatus.asObservable();
   }
+  
 
   async logout(): Promise<void> {
     this.currentUser = null;
-    localStorage.removeItem('selectedCompanyId');
     this.loggedIn.next(false);
-    this.setCurrentCompanyId(0);
+    this.companySelected.next(false);
+    this.adminStatus.next(false);
+    this.companyId.next(null);
     this.router.navigate(['/login']);
   }
 }
