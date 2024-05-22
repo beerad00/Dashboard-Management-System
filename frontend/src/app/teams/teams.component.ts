@@ -30,7 +30,7 @@ export class TeamsComponent {
     if(!this.currentUser){
       this.router.navigate(['/login']);
     }
-    
+
     this.getTeams();
   }
 
@@ -62,12 +62,11 @@ export class TeamsComponent {
 
   getProjects = async (teamId: number): Promise<void> => {
     this.selectedCompanyId = Number(localStorage.getItem('selectedCompanyId'));
-    console.log(this.selectedCompanyId, teamId, "I pressed projects!");
     if (this.selectedCompanyId) {
       try {
-        console.log(this.selectedCompanyId, teamId, "I pressed projects!")
+
         const projects = await this.companyService.getProjectsByTeamId(this.selectedCompanyId, teamId);
-        console.log(projects);
+
         this.handleProjectsResponse(projects);
       } catch (error) {
         this.handleError('Failed to fetch projects', error);
@@ -82,12 +81,10 @@ export class TeamsComponent {
 
   private handleTeamsResponse(teams: TeamDto[]): void {
     this.teams = teams;
-    console.log("Teams available!", this.teams);
   }
 
   private handleProjectsResponse(projects: ProjectDto[]): void {
     this.projects = projects;
-    console.log(this.projects);
     this.router.navigate(['/projects']);
   }
 
