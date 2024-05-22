@@ -21,6 +21,7 @@ export class AddTeamComponent {
   };
   companyId: number | null = null;
   companyEmployees: FullUserDto[] = [];
+  selectedEmployee = null;
 
   constructor(private http: HttpClient,
               private router: Router,
@@ -31,6 +32,17 @@ export class AddTeamComponent {
   ngOnInit(): void{
     this.companyId = this.authService.getCurrentCompanyId();
     this.getCompanyEmployees();
+  }
+
+  addTeammate() {
+    if (this.selectedEmployee && !this.teamRequest.teammates.includes(this.selectedEmployee)) {
+      this.teamRequest.teammates.push(this.selectedEmployee);
+      this.selectedEmployee = null;
+    }
+  }
+
+  removeTeammate(index: number) {
+    this.teamRequest.teammates.splice(index, 1);
   }
 
   async getCompanyEmployees() {
