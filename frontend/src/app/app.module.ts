@@ -12,17 +12,10 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
-<<<<<<< HEAD
 import { AddUserComponent } from './users/add-user/add-user.component';
-=======
-import { AddUserComponent } from './add-user/add-user.component';
-import { TeamsComponent } from './teams/teams.component';
->>>>>>> origin/jreed-frontend
-import { UserRegistryComponent } from './user-registry/user-registry.component';
 import { CompanySelectComponent } from './company-select/company-select.component';
 import { CompanyService } from './services/company.service';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
-<<<<<<< HEAD
 import { EditProjectComponent } from './teams/projects/edit-project/edit-project.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
 import { TeamsComponent } from './teams/teams.component';
@@ -30,7 +23,6 @@ import { ProjectsComponent } from './teams/projects/projects.component';
 import { UsersComponent } from './users/users.component';
 import { AnnouncementCardComponent } from './announcements/announcement-card/announcement-card.component';
 import { TeamCardComponent } from './teams/team-card/team-card.component';
-
 
 
 
@@ -54,24 +46,11 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-=======
-import { EditProjectComponent } from './edit-project/edit-project.component';
-import { AddTeamComponent } from './add-team/add-team.component';
-
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    TeamsComponent,
->>>>>>> origin/jreed-frontend
     LoginComponent,
     RegisterComponent,
     AdminDashboardComponent,
-    UserDashboardComponent, // Declare the new component
-    CompanySelectComponent,
-    AddUserComponent,
+    UserDashboardComponent,
     EditProjectComponent,
-<<<<<<< HEAD
     AnnouncementsComponent,
     NavbarComponent,
     TeamsComponent,
@@ -79,15 +58,12 @@ import { AddTeamComponent } from './add-team/add-team.component';
     UsersComponent,
     AnnouncementCardComponent,
     TeamCardComponent,
-=======
-    AddTeamComponent
->>>>>>> origin/jreed-frontend
+    AddUserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-<<<<<<< HEAD
     RouterModule.forRoot(routes),
     HttpClientModule
   ],
@@ -99,15 +75,4 @@ import { AddTeamComponent } from './add-team/add-team.component';
 
 
 
-export class AppModule { 
-
-
-}
-=======
-    HttpClientModule
-  ],
-  providers: [AuthService, CompanyService],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
->>>>>>> origin/jreed-frontend
+export class AppModule {}

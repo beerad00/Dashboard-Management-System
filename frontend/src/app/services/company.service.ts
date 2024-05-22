@@ -21,10 +21,7 @@ export class CompanyService {
       if (!response) {
         throw new Error('No users found');
       }
-<<<<<<< HEAD
       console.log(response, 'response')
-=======
->>>>>>> origin/jreed-frontend
       return response;
     } catch (error) {
       this.handleError(error);

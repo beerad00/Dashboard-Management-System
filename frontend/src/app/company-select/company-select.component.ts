@@ -33,7 +33,6 @@ export class CompanySelectComponent implements OnInit {
 
   onSelectCompany() {
     if (this.selectedCompanyId) {
-<<<<<<< HEAD
       console.log('Selected company from company-select:', this.selectedCompanyId);
       localStorage.setItem('selectedCompanyId', this.selectedCompanyId.toString());
       this.authService.setCurrentCompanyId(this.selectedCompanyId);
@@ -45,10 +44,4 @@ export class CompanySelectComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
-=======
-      localStorage.setItem('selectedCompanyId', this.selectedCompanyId.toString());
-      this.router.navigate(['/admin-dashboard'], { queryParams: { companyId: this.selectedCompanyId } });
-    }
-  }
->>>>>>> origin/jreed-frontend
 }
