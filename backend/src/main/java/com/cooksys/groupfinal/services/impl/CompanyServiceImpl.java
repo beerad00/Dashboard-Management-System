@@ -1,12 +1,6 @@
 package com.cooksys.groupfinal.services.impl;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import com.cooksys.groupfinal.dtos.*;
 import com.cooksys.groupfinal.mappers.*;
@@ -66,7 +60,7 @@ public class CompanyServiceImpl implements CompanyService {
 		Company company = findCompany(id);
 		List<Announcement> sortedList = new ArrayList<Announcement>(company.getAnnouncements());
 		sortedList.sort(Comparator.comparing(Announcement::getDate).reversed());
-		Set<Announcement> sortedSet = new HashSet<Announcement>(sortedList);
+		Set<Announcement> sortedSet = new LinkedHashSet<>(sortedList);
 		return announcementMapper.entitiesToDtos(sortedSet);
 	}
 

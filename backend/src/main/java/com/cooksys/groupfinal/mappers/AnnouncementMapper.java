@@ -1,5 +1,6 @@
 package com.cooksys.groupfinal.mappers;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.mapstruct.Mapper;
@@ -14,6 +15,6 @@ public interface AnnouncementMapper {
 
     Announcement dtoToEntity(AnnouncementDto announcementDto);
 
-  Set<AnnouncementDto> entitiesToDtos(Set<Announcement> announcement);
+  LinkedHashSet<AnnouncementDto> entitiesToDtos(Set<Announcement> announcement);
     
 }
