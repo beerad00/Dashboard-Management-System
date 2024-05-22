@@ -20,10 +20,15 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
+    this.credentials = {
+      username: '',
+      password: ''
+    };
     this.authService.logout();
   }
 
   async onSubmit(): Promise<void> {
+    console.log('Login credentials:', this.credentials);
     try {
       const response = await this.authService.login(this.credentials);
       if (response) {

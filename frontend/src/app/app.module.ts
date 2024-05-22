@@ -22,6 +22,7 @@ import { TeamCardComponent } from './teams/team-card/team-card.component';
 import { AddTeamComponent } from './teams/add-team/add-team.component';
 import { AddProjectComponent } from './teams/projects/add-project/add-project.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AddAnnouncementComponent } from './announcements/add-announcement/add-announcement.component';
 
 
 
@@ -32,9 +33,13 @@ const routes: Routes = [
   { path: "edit-project", component: EditProjectComponent},
   { path: "company-select", component: CompanySelectComponent},
   { path: "add-user", component: AddUserComponent},
+  { path: "add-announcement", component: AddAnnouncementComponent},
   { path: "login", component: LoginComponent},
   { path: "teams", component: TeamsComponent},
   { path: "projects", component: ProjectsComponent},
+  { path: "add-team", component: AddTeamComponent},
+  { path: "add-project", component: AddProjectComponent},
+  { path: 'add-project/:teamId', component: AddProjectComponent },
   { path: 'projects/:teamId', component: ProjectsComponent },
   { path: "users", component: UsersComponent},
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -58,7 +63,8 @@ const routes: Routes = [
     TeamCardComponent,
     AddTeamComponent,
     AddProjectComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AddAnnouncementComponent
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,7 @@ import { AuthService } from '../services/auth.service';
 export class NavbarComponent implements OnInit {
   isAdmin: boolean = false;
   isCompanySelected: boolean = false;
+  isLoggedIn: boolean = false;
   companyId: number | null = null;
   showUsers: boolean = false;
   showCompany: boolean = false;
@@ -23,10 +24,16 @@ export class NavbarComponent implements OnInit {
     const companyId = this.authService.getCurrentCompanyId();
     if(currentUser) {
       this.isAdmin = currentUser.admin;
+      if(!currentUser) {
+        this.showUsers = true;
+        this.showCompany = true;
+      }
     }
   }
 
   logout(): void {
+    this.isCompanySelected = false;
+    this.isLoggedIn = false;
     this.authService.logout();
   }
 }

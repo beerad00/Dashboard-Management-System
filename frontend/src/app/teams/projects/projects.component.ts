@@ -91,6 +91,10 @@ export class ProjectsComponent {
     this.selectedProject = null;
   }
 
+  addProject() {
+    this.router.navigate(['/add-project', this.teamId]);
+  }
+
   onCreateProject() {
     this.selectedProject = {
       id: 0,

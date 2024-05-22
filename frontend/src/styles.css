@@ -17,3 +17,10 @@
   .button:hover {
     background-color: #357ae8; /* Change color as needed */
   }
+
+  body {
+    background: linear-gradient(to bottom, #e4dacb, #082d52); /* Lighter navy to darker navy */
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Ensure the gradient covers the entire viewport height */
+  }

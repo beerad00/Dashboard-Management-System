@@ -1,10 +1,8 @@
 <div *ngIf="teams.length > 0" class="p-4">
-    <h2 class="text-3xl font-bold mb-6 text-center">Teams</h2>
-
-    
+    <h2 class="text-4xl font-bold underline mb-6 text-center">Teams</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <div *ngIf="this.currentUser.admin" class="team-card p-6 border rounded-lg shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
-        <button class="button" (click)="addTeam()">Add Team</button>
+      <div (click)="addTeam()" *ngIf="this.currentUser.admin" class="team-card p-6 border rounded-lg shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
+        <h1 class="button text-2xl text-center my-16 p-12" >Click Here to Add a Team!</h1>
       </div>
       <app-team-card *ngFor="let team of this.teams" [team]="team"></app-team-card>
     </div>

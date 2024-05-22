@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ProjectDto } from 'src/app/models/projectDto';
 import { ProjectService } from 'src/app/services/project.service';
 
@@ -9,35 +10,42 @@ import { ProjectService } from 'src/app/services/project.service';
 })
 export class AddProjectComponent {
 
-  @Input() project: ProjectDto = {
+project: ProjectDto = {
     id: 0,
     name: '',
     description: '',
     active: true,
     team: null
   };
-  @Output() save = new EventEmitter<ProjectDto>();
-  @Output() cancel = new EventEmitter<void>();
 
-  constructor(private projectService: ProjectService) {}
+  teamId: number | null = null;
+
+  constructor(private projectService: ProjectService, private route: ActivatedRoute, private router: Router) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      const teamIdParam = params.get('teamId');
+      this.teamId = teamIdParam ? +teamIdParam : 0; // Default to 0 or some other value
+    });
+    console.log(this.teamId);
+    if(this.teamId){
+      this.project.team = {id: this.teamId, name: '', description: '', teammates: []};
+  }
+}
+
 
   async onSave() {
     try {
-      let updatedProject: ProjectDto;
-      if (this.project.id === 0) {
-        // Assuming the parent component handles the creation with the correct teamId
-        updatedProject = this.project;
-      } else {
-        updatedProject = await this.projectService.updateProject(this.project);
-      }
-      this.save.emit(updatedProject);
+      const newProject = await this.projectService.createProject(this.project, this.teamId!);
+      this.project = newProject;
+      this.router.navigate(['/projects', this.teamId]);
     } catch (error) {
       console.error('Failed to save project', error);
     }
   }
 
   onCancel() {
-    this.cancel.emit();
+    this.router.navigate(['/projects']);
   }
 
 }

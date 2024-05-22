@@ -17,6 +17,7 @@ export class AnnouncementsComponent {
   selectedCompanyId: number | null = null;
   errorMessage: string = '';
   loading: boolean = false;
+  creatingAnnouncement: boolean = false;
 
 
   constructor(
@@ -57,6 +58,17 @@ export class AnnouncementsComponent {
     } else {
       this.errorMessage = 'No company selected.';
     }
+  }
+
+
+
+  addAnouncement() {
+    this.router.navigate(['/add-announcement']);
+  }
+
+
+  onCancelAnnouncement() {
+    this.creatingAnnouncement = false;
   }
 
   private handleAnnouncementsResponse(announcements: AnnouncementDto[]): void {
