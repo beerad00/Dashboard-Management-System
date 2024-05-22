@@ -39,4 +39,9 @@ export class CompanySelectComponent implements OnInit {
       this.router.navigate(['/announcements'], { queryParams: { companyId: this.selectedCompanyId } });
     }
   }
+
+  backToLogin() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }

@@ -146,4 +146,8 @@ export class AdminDashboardComponent implements OnInit {
   onAddUser() {
     this.router.navigate(['/add-user']);
   }
+
+  addTeam(){
+    this.router.navigate(['/add-team']);
+  }
 }

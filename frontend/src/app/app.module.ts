@@ -24,6 +24,8 @@ import { ProjectsComponent } from './teams/projects/projects.component';
 import { UsersComponent } from './users/users.component';
 import { AnnouncementCardComponent } from './announcements/announcement-card/announcement-card.component';
 import { TeamCardComponent } from './teams/team-card/team-card.component';
+import { AddTeamComponent } from './teams/add-team/add-team.component';
+
 
 
 
@@ -51,7 +53,7 @@ const routes: Routes = [
     LoginComponent,
     RegisterComponent,
     AdminDashboardComponent,
-    UserDashboardComponent, // Declare the new component
+    UserDashboardComponent,
     CompanySelectComponent,
     AddUserComponent,
     EditProjectComponent,
@@ -62,6 +64,7 @@ const routes: Routes = [
     UsersComponent,
     AnnouncementCardComponent,
     TeamCardComponent,
+    AddTeamComponent
   ],
   imports: [
     BrowserModule,
