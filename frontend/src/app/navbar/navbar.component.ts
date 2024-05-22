@@ -12,15 +12,16 @@ export class NavbarComponent implements OnInit {
   isAdmin: boolean = false;
   isCompanySelected: boolean = false;
   companyId: number | null = null;
+  showUsers: boolean = false;
+  showCompany: boolean = false;
+
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     const currentUser = this.authService.getCurrentUser();
     const companyId = this.authService.getCurrentCompanyId();
-    console.log(companyId, "companyId from navbar oninit");
-    
-    if (currentUser) {
+    if(currentUser) {
       this.isAdmin = currentUser.admin;
     }
   }

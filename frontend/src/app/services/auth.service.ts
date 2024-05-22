@@ -15,6 +15,7 @@ export class AuthService {
   private apiUrl = 'http://localhost:8080/users';
   private currentUser: FullUserDto | null = null;
   private loggedIn = new BehaviorSubject<boolean>(false);
+  private adminStatus = new BehaviorSubject<boolean>(false);
   private companyId = new BehaviorSubject<number | null>(null);
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -25,6 +26,9 @@ export class AuthService {
       throw new Error('Login failed');
     }
     this.currentUser = response;
+    if (response.admin) {
+      this.adminStatus.next(true);
+    }
     return response;
   }
 
@@ -70,6 +74,10 @@ export class AuthService {
 
   get isLoggedIn(): Observable<boolean> {
     return this.loggedIn.asObservable();
+  }
+
+  get isAdmin(): Observable<boolean> {
+    return this.adminStatus.asObservable();
   }
 
   async logout(): Promise<void> {

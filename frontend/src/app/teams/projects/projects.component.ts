@@ -37,13 +37,15 @@ export class ProjectsComponent {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const teamId = +params['teamId']; // Convert to number
-      // Now you have the team ID, you can use it to fetch the projects associated with that team
+      const teamId = +params['teamId'];
       console.log('Team ID:', teamId);
       this.teamId = teamId;
-      // Fetch projects based on teamId
   })
-    this.selectedCompanyId = Number(localStorage.getItem('selectedCompanyId'));
+    this.selectedCompanyId = this.authService.getCurrentCompanyId();
+    this.currentUser = this.authService.getCurrentUser();
+    if(!this.currentUser){
+      this.router.navigate(['/login']);
+    }
     this.getProjectsByTeamId(this.teamId!);
     console.log(this.selectedCompanyId, this.teamId, "I pressed projects!");
 
@@ -51,13 +53,14 @@ export class ProjectsComponent {
 
 
   getProjectsByTeamId = async (teamId: number): Promise<void> => {
-    this.selectedCompanyId = Number(localStorage.getItem('selectedCompanyId'));
+    if(this.selectedCompanyId){
     try {
       const projects = await this.companyService.getProjectsByTeamId(this.selectedCompanyId, teamId);
       this.handleProjectsResponse(projects);
     } catch (error) {
       this.handleError('Failed to fetch projects', error);
     }
+  }
   }
 
 
@@ -106,6 +109,10 @@ export class ProjectsComponent {
 
   private handleProjectsResponse(projects: ProjectDto[]): void {
     this.projects = projects;
+  }
+
+  returnToTeams() {
+    this.router.navigate(['/teams']);
   }
 
 

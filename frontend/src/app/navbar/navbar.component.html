@@ -2,9 +2,9 @@
   <div class="container mx-auto">
     <ul class="flex justify-between items-center py-4">
       <li><a class="text-white hover:text-gray-300" routerLink="/announcements">Home</a></li>
-      <li><a class="text-white hover:text-gray-300" routerLink="/company-select">Company</a></li>
+      <li *ngIf="this.isAdmin" ><a  class="text-white hover:text-gray-300" routerLink="/company-select">Company</a></li>
       <li><a class="text-white hover:text-gray-300" routerLink="/teams">Teams</a></li>
-      <li><a class="text-white hover:text-gray-300" routerLink="/users">Users</a></li>
+      <li *ngIf="this.isAdmin"><a class="text-white hover:text-gray-300" routerLink="/users">Users</a></li>
       <li><a class="text-white hover:text-gray-300 cursor-pointer" (click)="logout()">Logout</a></li>
     </ul>
   </div>

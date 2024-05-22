@@ -28,6 +28,9 @@ export class AnnouncementsComponent {
 
   ngOnInit(): void {
     this.currentUser = this.authService.getCurrentUser();
+    if(!this.currentUser){
+      this.router.navigate(['/login']);
+    }
     console.log(this.currentUser);
     this.selectedCompanyId = this.authService.getCurrentCompanyId();
     console.log(this.selectedCompanyId, "GLOBAL COMPANY ID IN ANNOUNCEMENTS");

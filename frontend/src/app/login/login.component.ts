@@ -27,6 +27,7 @@ export class LoginComponent {
         if (response.admin) {
           this.router.navigate(['/select-company']); // Redirect to company selection page for admins
         } else {
+          this.authService.setCurrentCompanyId(response.companies[0].id);
           this.router.navigate(['/announcements']); // Redirect to user dashboard for non-admins
         }
       } else {

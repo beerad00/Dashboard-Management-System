@@ -1,7 +1,11 @@
 <div *ngIf="teams.length > 0" class="p-4">
     <h2 class="text-3xl font-bold mb-6 text-center">Teams</h2>
-    <button class="button" (click)="addTeam()">Add Team</button>
+
+    
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div *ngIf="this.currentUser.admin" class="team-card p-6 border rounded-lg shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
+        <button class="button" (click)="addTeam()">Add Team</button>
+      </div>
       <app-team-card *ngFor="let team of this.teams" [team]="team"></app-team-card>
     </div>
   </div>

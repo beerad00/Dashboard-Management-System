@@ -25,10 +25,12 @@ export class TeamsComponent {
 
   ngOnInit(): void {
     this.currentUser = this.authService.getCurrentUser();
-    console.log(this.currentUser);
-    this.selectedCompanyId = Number(localStorage.getItem('selectedCompanyId'));
-    console.log(this.selectedCompanyId);
+    this.selectedCompanyId = this.authService.getCurrentCompanyId();
 
+    if(!this.currentUser){
+      this.router.navigate(['/login']);
+    }
+    
     this.getTeams();
   }
 

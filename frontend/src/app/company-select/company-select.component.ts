@@ -13,10 +13,15 @@ import { FullUserDto } from '../models/full-user.dto';
 export class CompanySelectComponent implements OnInit {
   companies: CompanyDto[] = [];
   selectedCompanyId: number | null = null;
+  currentUser: FullUserDto | null = null;
 
   constructor(private companyService: CompanyService, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
+    this.authService.getCurrentUser();
+    if(!this.currentUser){
+      this.router.navigate(['/login']);
+    }
     this.loadCompanies();
   }
 
