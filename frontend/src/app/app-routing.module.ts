@@ -8,6 +8,7 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { UserRegistryComponent } from './user-registry/user-registry.component';
 import { CompanySelectComponent } from './company-select/company-select.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { AddTeamComponent } from './add-team/add-team.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'user-dashboard', component: UserDashboardComponent }, // New route for user dashboard
   { path: 'select-company', component: CompanySelectComponent },
   { path: 'add-user', component: AddUserComponent },
+  { path: 'add-team', component: AddTeamComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
