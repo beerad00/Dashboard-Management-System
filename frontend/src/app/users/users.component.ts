@@ -22,12 +22,12 @@ export class UsersComponent {
   ) {}
 
   ngOnInit(): void {
-    this.authService.getCurrentUser();
+    this.currentUser = this.authService.getCurrentUser();
     if(!this.currentUser){
       this.router.navigate(['/login']);
     }
     this.selectedCompanyId = this.authService.getCurrentCompanyId();
-    this.currentUser = this.authService.getCurrentUser();
+
     this.fetchUsers(this.selectedCompanyId);
   }
 

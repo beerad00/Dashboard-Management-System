@@ -18,8 +18,8 @@ export class CompanySelectComponent implements OnInit {
   constructor(private companyService: CompanyService, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.authService.getCurrentUser();
-    if(!this.currentUser){
+    this.currentUser = this.authService.getCurrentUser();
+    if (!this.currentUser) {
       this.router.navigate(['/login']);
     }
     this.loadCompanies();

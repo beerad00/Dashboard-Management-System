@@ -23,11 +23,14 @@ export class LoginComponent {
     try {
       const response = await this.authService.login(this.credentials);
       console.log('Login response:', response);
-      if (response && response.profile) {
+      if (response) {
+        console.log("loging successful")
         if (response.admin) {
-          this.router.navigate(['/select-company']); // Redirect to company selection page for admins
+          console.log("admin")
+          this.router.navigate(['/company-select']); // Redirect to company selection page for admins
         } else {
           this.authService.setCurrentCompanyId(response.companies[0].id);
+          console.log(this.authService.getCurrentUser());
           this.router.navigate(['/announcements']); // Redirect to user dashboard for non-admins
         }
       } else {
