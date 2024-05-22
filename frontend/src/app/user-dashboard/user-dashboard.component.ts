@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+// src/app/user-dashboard/user-dashboard.component.ts
+>>>>>>> origin/jreed-frontend
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { CompanyService } from '../services/company.service';

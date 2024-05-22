@@ -1,13 +1,24 @@
+<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
 import { FullUserDto } from '../models/full-user.dto';
 import { CompanyService } from '../services/company.service';
+=======
+// src/app/admin-dashboard/admin-dashboard.component.ts
+import { Component, OnInit } from '@angular/core';
+import { FullUserDto } from '../models/full-user.dto';
+import { CompanyService } from '../services/company.service';
+import { ProjectService } from '../services/project.service';
+>>>>>>> origin/jreed-frontend
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { AnnouncementDto } from '../models/announcementDto';
 import { TeamDto } from '../models/team.dto';
 import { ProjectDto } from '../models/projectDto';
+<<<<<<< HEAD
 import { ProjectService } from '../services/project.service';
 
+=======
+>>>>>>> origin/jreed-frontend
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -146,4 +157,11 @@ export class AdminDashboardComponent implements OnInit {
   onAddUser() {
     this.router.navigate(['/add-user']);
   }
+<<<<<<< HEAD
+=======
+
+  addTeam(){
+    this.router.navigate(['/add-team']);
+  }
+>>>>>>> origin/jreed-frontend
 }

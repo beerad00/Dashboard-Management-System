@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="login-container">
     <div class="login-box">
       <h1 class="text-4xl font-bold underline" >Select Company</h1>
@@ -10,5 +11,16 @@
       </form>
       <button class="button my-8" (click)="this.backToLogin()" type="submit">Back to Login</button>
     </div>
+=======
+<div class="company-select-container">
+    <h1>Select a Company</h1>
+    <form (ngSubmit)="onSelectCompany()">
+      <label for="company">Company</label>
+      <select id="company" [(ngModel)]="selectedCompanyId" name="company" required>
+        <option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</option>
+      </select>
+      <button type="submit">Select Company</button>
+    </form>
+>>>>>>> origin/jreed-frontend
   </div>
   

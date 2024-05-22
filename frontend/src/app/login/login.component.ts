@@ -16,6 +16,10 @@ export class LoginComponent {
   };
 
   errorMessage: string = '';
+<<<<<<< HEAD
+=======
+  currentUser: any;
+>>>>>>> origin/jreed-frontend
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -27,7 +31,11 @@ export class LoginComponent {
         if (response.admin) {
           this.router.navigate(['/select-company']); // Redirect to company selection page for admins
         } else {
+<<<<<<< HEAD
           this.router.navigate(['/announcements']); // Redirect to user dashboard for non-admins
+=======
+          this.router.navigate(['/user-dashboard']); // Redirect to user dashboard for non-admins
+>>>>>>> origin/jreed-frontend
         }
       } else {
         console.error('Unexpected response structure:', response);
@@ -38,4 +46,16 @@ export class LoginComponent {
       this.errorMessage = 'Login failed. Please check your credentials and try again.';
     }
   }
+<<<<<<< HEAD
+=======
+
+  setUser() {
+    const userId = this.currentUser?.id;
+    if (userId !== undefined && userId !== null) {
+      localStorage.setItem('currentUser', userId.toString());
+    } else {
+      console.error('User ID is undefined or null');
+    }
+  }
+>>>>>>> origin/jreed-frontend
 }

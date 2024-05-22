@@ -12,11 +12,17 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
+<<<<<<< HEAD
 import { AddUserComponent } from './users/add-user/add-user.component';
+=======
+import { AddUserComponent } from './add-user/add-user.component';
+import { TeamsComponent } from './teams/teams.component';
+>>>>>>> origin/jreed-frontend
 import { UserRegistryComponent } from './user-registry/user-registry.component';
 import { CompanySelectComponent } from './company-select/company-select.component';
 import { CompanyService } from './services/company.service';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+<<<<<<< HEAD
 import { EditProjectComponent } from './teams/projects/edit-project/edit-project.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
 import { TeamsComponent } from './teams/teams.component';
@@ -48,6 +54,16 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+=======
+import { EditProjectComponent } from './edit-project/edit-project.component';
+import { AddTeamComponent } from './add-team/add-team.component';
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    TeamsComponent,
+>>>>>>> origin/jreed-frontend
     LoginComponent,
     RegisterComponent,
     AdminDashboardComponent,
@@ -55,6 +71,7 @@ const routes: Routes = [
     CompanySelectComponent,
     AddUserComponent,
     EditProjectComponent,
+<<<<<<< HEAD
     AnnouncementsComponent,
     NavbarComponent,
     TeamsComponent,
@@ -62,11 +79,15 @@ const routes: Routes = [
     UsersComponent,
     AnnouncementCardComponent,
     TeamCardComponent,
+=======
+    AddTeamComponent
+>>>>>>> origin/jreed-frontend
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+<<<<<<< HEAD
     RouterModule.forRoot(routes),
     HttpClientModule
   ],
@@ -82,3 +103,11 @@ export class AppModule {
 
 
 }
+=======
+    HttpClientModule
+  ],
+  providers: [AuthService, CompanyService],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+>>>>>>> origin/jreed-frontend

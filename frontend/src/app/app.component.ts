@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+<<<<<<< HEAD
 import { AuthService } from './services/auth.service';
+=======
+>>>>>>> origin/jreed-frontend
 
 @Component({
   selector: 'app-root',
@@ -8,6 +11,9 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   title = 'client';
+<<<<<<< HEAD
   constructor(public authService: AuthService) {}
   
+=======
+>>>>>>> origin/jreed-frontend
 }

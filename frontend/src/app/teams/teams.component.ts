@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
 import { FullUserDto } from '../models/full-user.dto';
 import { CompanyService } from '../services/company.service';
@@ -7,6 +8,9 @@ import { AnnouncementDto } from '../models/announcementDto';
 import { TeamDto } from '../models/team.dto';
 import { ProjectDto } from '../models/projectDto';
 import { ProjectService } from '../services/project.service';
+=======
+import { Component } from '@angular/core';
+>>>>>>> origin/jreed-frontend
 
 @Component({
   selector: 'app-teams',
@@ -15,6 +19,7 @@ import { ProjectService } from '../services/project.service';
 })
 export class TeamsComponent {
 
+<<<<<<< HEAD
   constructor(
     private authService: AuthService,
     private companyService: CompanyService,
@@ -90,4 +95,6 @@ export class TeamsComponent {
   }
 
 
+=======
+>>>>>>> origin/jreed-frontend
 }
