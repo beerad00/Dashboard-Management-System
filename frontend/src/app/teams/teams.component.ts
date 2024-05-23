@@ -32,6 +32,9 @@ export class TeamsComponent {
     }
 
     this.getTeams();
+    setInterval(() => {
+      this.getTeams();
+    }, 2000);
   }
 
   users: FullUserDto[] = [];
