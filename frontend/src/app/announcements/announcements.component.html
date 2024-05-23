@@ -1,7 +1,7 @@
 <div *ngIf="loading" class="flex flex-col justify-center items-center m-auto text-4xl">Loading...</div>
 <div class="flex flex-col  text-justify-center items-center pt-4" *ngIf="announcements.length > 0">
-    <h2 class="text-4xl font-bold underline mb-8">Announcements</h2>
-    <button *ngIf="this.currentUser.admin" class="button m-4" (click)="this.addAnouncement()">Create Announcement</button>
+    <h2 class="text-4xl font-bold underline mb-4">Announcements</h2>
+    <button *ngIf="this.currentUser.admin" class="button m-4 animate-pulse" (click)="this.addAnouncement()">Create Announcement</button>
     <ul>
       <li *ngFor="let announcement of announcements">
         <app-announcement-card  [announcement]="announcement"></app-announcement-card>

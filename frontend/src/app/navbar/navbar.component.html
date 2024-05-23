@@ -1,14 +1,15 @@
 <nav class="bg-gray-800">
   <div class="container mx-auto">
-      <h1 class="text-white text-xl font-bold">Welcome, <span class="text-orange-500">{{ this.currentUser.profile.firstName }}</span></h1>
+      <h1 class="text-white text-xl font-bold">Welcome, <span class="text-orange-500">{{ currentUser.profile.firstName }}</span></h1>
       <ul class="flex justify-between items-center py-4" id="navbarMenu">
           <li><a class="text-white text-xl font-bold hover:text-gray-300" routerLink="/announcements">Home</a></li>
-          <li *ngIf="this.isAdmin"><a class="text-white text-xl font-bold hover:text-gray-300" routerLink="/company-select">Company</a></li>
+          <li *ngIf="isAdmin"><a class="text-white text-xl font-bold hover:text-gray-300" routerLink="/company-select">Company</a></li>
           <li><a class="text-white text-xl font-bold hover:text-gray-300" routerLink="/teams">Teams</a></li>
-          <li *ngIf="this.isAdmin"><a class="text-xl font-bold text-white hover:text-gray-300" routerLink="/users">Users</a></li>
+          <li *ngIf="isAdmin"><a class="text-xl font-bold text-white hover:text-gray-300" routerLink="/users">Users</a></li>
           <li><a class="text-xl font-bold text-white hover:text-gray-300 cursor-pointer" (click)="logout()">Logout</a></li>
+          <!-- Add this line for the toggle button -->
           <li class="block sm:hidden">
-              <button id="toggleButton" class="text-white focus:outline-none">
+              <button id="toggleButton" class="text-white focus:outline-none" (click)="toggleMenu()">
                   <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path *ngIf="!showMenu" d="M4 6h16M4 12h16m-7 6h7" />
                       <path *ngIf="showMenu" d="M6 18L18 6M6 6l12 12" />
@@ -17,13 +18,13 @@
           </li>
       </ul>
   </div>
-  
+  <!-- Add the div for the collapsed menu items -->
   <div class="sm:hidden" [ngClass]="{ 'block': showMenu, 'hidden': !showMenu }">
       <ul class="px-2 py-1">
           <li><a class="block text-white text-xl font-bold hover:text-gray-300" routerLink="/announcements">Home</a></li>
-          <li *ngIf="this.isAdmin"><a class="block text-white text-xl font-bold hover:text-gray-300" routerLink="/company-select">Company</a></li>
+          <li *ngIf="isAdmin"><a class="block text-white text-xl font-bold hover:text-gray-300" routerLink="/company-select">Company</a></li>
           <li><a class="block text-white text-xl font-bold hover:text-gray-300" routerLink="/teams">Teams</a></li>
-          <li *ngIf="this.isAdmin"><a class="block text-xl font-bold text-white hover:text-gray-300" routerLink="/users">Users</a></li>
+          <li *ngIf="isAdmin"><a class="block text-xl font-bold text-white hover:text-gray-300" routerLink="/users">Users</a></li>
           <li><a class="block text-xl font-bold text-white hover:text-gray-300 cursor-pointer" (click)="logout()">Logout</a></li>
       </ul>
   </div>

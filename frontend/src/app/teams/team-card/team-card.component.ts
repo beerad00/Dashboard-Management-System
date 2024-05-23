@@ -27,7 +27,7 @@ export class TeamCardComponent {
 
   getProjects = async (teamId: number): Promise<void> => {
     this.teamId = teamId;
-    this.selectedCompanyId = Number(localStorage.getItem('selectedCompanyId'));
+    this.selectedCompanyId = this.authService.getCurrentCompanyId();
     if (this.selectedCompanyId) {
       try {
         const projects = await this.companyService.getProjectsByTeamId(this.selectedCompanyId, this.teamId);

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FullUserDto } from '../models/full-user.dto';
 import { AnnouncementDto } from '../models/announcementDto';
 import { AuthService } from '../services/auth.service';
@@ -11,6 +11,7 @@ import { CompanyService } from '../services/company.service';
   styleUrls: ['./announcements.component.css']
 })
 export class AnnouncementsComponent {
+
   users: FullUserDto[] = [];
   currentUser: any;
   announcements: AnnouncementDto[] = [];

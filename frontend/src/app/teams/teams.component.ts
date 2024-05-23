@@ -37,10 +37,10 @@ export class TeamsComponent {
   ngOnInit(): void {
     this.currentUser = this.authService.getCurrentUser();
     this.selectedCompanyId = this.authService.getCurrentCompanyId();
-    this.isAdmin = this.currentUser.admin;
-    if(!this.currentUser){
+    if(this.currentUser == null){
       this.router.navigate(['/login']);
     }
+    this.isAdmin = this.currentUser.admin;
 
     this.getTeams();
     setInterval(() => {
