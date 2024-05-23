@@ -27,3 +27,5 @@
     background-size: cover; /* Ensure the gradient covers the entire viewport */
     overflow-x: hidden; /* Prevent horizontal scrolling */
   }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

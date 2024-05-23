@@ -22,9 +22,10 @@ export class ProjectsComponent {
   selectedCompanyId: number | null = null;
   selectedTeamId: number | null = null;
   errorMessage: string = '';
-  currentUser: any;
+  currentUser: FullUserDto | null = null;
   teamId: number | null = null;
-
+  isTeamMember: boolean = false;
+  isAdmin: boolean = false;
 
 
   constructor(
@@ -37,17 +38,16 @@ export class ProjectsComponent {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const teamId = +params['teamId'];
-      console.log('Team ID:', teamId);
-      this.teamId = teamId;
+      this.teamId = +params['teamId'];
   })
     this.selectedCompanyId = this.authService.getCurrentCompanyId();
     this.currentUser = this.authService.getCurrentUser();
     if(!this.currentUser){
       this.router.navigate(['/login']);
     }
+    this.checkTeamMembership();
     this.getProjectsByTeamId(this.teamId!);
-    console.log(this.selectedCompanyId, this.teamId, "I pressed projects!");
+    
 
   }
 
@@ -103,7 +103,16 @@ export class ProjectsComponent {
       active: true,
       team: this.teamId ? { id: this.teamId } : null
     } as ProjectDto;
-    console.log(this.selectedProject);
+  }
+
+  private checkTeamMembership(): void {
+    if (this.currentUser && this.currentUser.teams) {
+      this.isTeamMember = this.currentUser.teams.some((team: TeamDto) => team.id === this.teamId);
+      console.log(this.isTeamMember);
+      console.log(this.currentUser);
+      console.log(this.teamId);
+      console.log(this.currentUser.teams);
+    }
   }
 
   private handleError(message: string, error: any): void {
@@ -118,8 +127,6 @@ export class ProjectsComponent {
   returnToTeams() {
     this.router.navigate(['/teams']);
   }
-
-
 
 
 }

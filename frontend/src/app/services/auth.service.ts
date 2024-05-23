@@ -82,6 +82,7 @@ export class AuthService {
   }
 
   get isAdmin(): Observable<boolean> {
+    console.log('adminStatus', this.adminStatus.asObservable());
     return this.adminStatus.asObservable();
   }
   

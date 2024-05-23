@@ -1,8 +1,10 @@
-<div class="announcement-card bg-white rounded-lg shadow-md p-6 mb-6">
-  <h3 class="text-2xl font-bold mb-3">{{ announcement.title }}</h3>
-  <p class="text-lg text-gray-700 mb-4">{{ announcement.message }}</p>
-  <div class="border-t pt-4">
-    <small class="text-gray-500">Posted on: {{ announcement.date | date }}</small>
-    <p class="text-gray-700">Author: {{ announcement.author.profile.firstName }} {{ announcement.author.profile.lastName }}</p>
+<div class=" bg-fuchsia-50  shadow-md rounded-xl my-16 mx-4">
+  <h3 class="text-2xl bg-orange-300 font-bold rounded-t-xl py-4 mb-8 text-center">{{ announcement.title }}</h3>
+  <p class="text-lg text-gray-700 mb-8 mx-2">{{ announcement.message }}</p>
+  <div class="bg-slate-200 rounded-b-xl border-t pt-4 px-2">
+    <div class="flex flex-col justify-end items-end">
+      <small class="text-gray-500 underline">Posted on: {{ announcement.date | date }}</small>
+      <p class="text-gray-800">Author: {{ announcement.author.profile.firstName }} {{ announcement.author.profile.lastName }}</p>
+    </div>
   </div>
 </div>

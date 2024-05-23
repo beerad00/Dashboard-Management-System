@@ -23,6 +23,9 @@ import { AddTeamComponent } from './teams/add-team/add-team.component';
 import { AddProjectComponent } from './teams/projects/add-project/add-project.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AddAnnouncementComponent } from './announcements/add-announcement/add-announcement.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EditAnnouncementComponent } from './announcements/edit-announcement/edit-announcement.component';
+import { EditTeamComponent } from './teams/edit-team/edit-team.component';
 
 
 
@@ -34,10 +37,13 @@ const routes: Routes = [
   { path: "company-select", component: CompanySelectComponent},
   { path: "add-user", component: AddUserComponent},
   { path: "add-announcement", component: AddAnnouncementComponent},
+  { path: "edit-announcement", component: EditAnnouncementComponent},
   { path: "login", component: LoginComponent},
   { path: "teams", component: TeamsComponent},
   { path: "projects", component: ProjectsComponent},
   { path: "add-team", component: AddTeamComponent},
+  { path: "edit-team", component: EditTeamComponent},
+  { path: "edit-team/:teamToEdit", component: EditTeamComponent},
   { path: "add-project", component: AddProjectComponent},
   { path: 'add-project/:teamId', component: AddProjectComponent },
   { path: 'projects/:teamId', component: ProjectsComponent },
@@ -64,14 +70,17 @@ const routes: Routes = [
     AddTeamComponent,
     AddProjectComponent,
     PageNotFoundComponent,
-    AddAnnouncementComponent
+    AddAnnouncementComponent,
+    EditAnnouncementComponent,
+    EditTeamComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     RouterModule.forRoot(routes),
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   exports: [RouterModule],
   providers: [AuthService, CompanyService],

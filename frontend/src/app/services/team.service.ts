@@ -29,4 +29,20 @@ export class TeamService {
       this.router.navigate(['/admin-dashboard']);
   }
 
+  getTeam(teamId: number): TeamDto {
+    let team: TeamDto = {
+      id: 0,
+      name: '',
+      description: '',
+      teammates: []
+    };
+    this.http.get<TeamDto>(`${this.apiUrl}/${teamId}`).subscribe(
+      response => {
+        team = response;
+      }, error => {
+        console.error('Error getting team', error);
+      });
+    return team;
+  }
+
 }

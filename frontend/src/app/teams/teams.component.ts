@@ -23,20 +23,6 @@ export class TeamsComponent {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {
-    this.currentUser = this.authService.getCurrentUser();
-    this.selectedCompanyId = this.authService.getCurrentCompanyId();
-
-    if(!this.currentUser){
-      this.router.navigate(['/login']);
-    }
-
-    this.getTeams();
-    setInterval(() => {
-      this.getTeams();
-    }, 2000);
-  }
-
   users: FullUserDto[] = [];
   currentUser: any;
   announcements: AnnouncementDto[] = [];
@@ -46,6 +32,21 @@ export class TeamsComponent {
   selectedCompanyId: number | null = null;
   selectedTeamId: number | null = null;
   errorMessage: string = '';
+  isAdmin: boolean = false;
+
+  ngOnInit(): void {
+    this.currentUser = this.authService.getCurrentUser();
+    this.selectedCompanyId = this.authService.getCurrentCompanyId();
+    this.isAdmin = this.currentUser.admin;
+    if(!this.currentUser){
+      this.router.navigate(['/login']);
+    }
+
+    this.getTeams();
+    setInterval(() => {
+      this.getTeams();
+    }, 2000);
+  }
 
 
 
@@ -76,6 +77,11 @@ export class TeamsComponent {
       }
     } 
   }
+
+  getProjectsButton(teamId: number): void {
+    // Navigate to the Projects component with the team ID as a parameter
+    this.router.navigate(['/projects', teamId]);
+}
 
   private handleError(message: string, error: any): void {
     console.error(message, error);

@@ -1,7 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ProjectDto } from 'src/app/models/projectDto';
 import { TeamDto } from 'src/app/models/team.dto';
+import { AuthService } from 'src/app/services/auth.service';
 import { CompanyService } from 'src/app/services/company.service';
 
 @Component({
@@ -11,6 +13,8 @@ import { CompanyService } from 'src/app/services/company.service';
 })
 export class TeamCardComponent {
   @Input() team: any;
+  @Input() isAdmin: boolean = false;
+  @Output() teamID = new EventEmitter<number>();
   selectedCompanyId: number | null = null;
   errorMessage = '';
   teams: TeamDto[] = [];
@@ -18,23 +22,26 @@ export class TeamCardComponent {
   teamId: number | null = null;
 
 
-  constructor(private router: Router, private companyService: CompanyService) {}
+
+  constructor(private router: Router, private companyService: CompanyService, private authService: AuthService) {}
 
   getProjects = async (teamId: number): Promise<void> => {
     this.teamId = teamId;
     this.selectedCompanyId = Number(localStorage.getItem('selectedCompanyId'));
-    console.log(this.selectedCompanyId, teamId, "I pressed projects!");
     if (this.selectedCompanyId) {
       try {
-        console.log(this.selectedCompanyId, this.teamId, "I pressed projects!")
         const projects = await this.companyService.getProjectsByTeamId(this.selectedCompanyId, this.teamId);
-        console.log(projects);
         this.handleProjectsResponse(projects);
       } catch (error) {
         this.handleError('Failed to fetch projects', error);
       }
     } 
   }
+
+  editTeam(): void {
+    this.router.navigate(['/edit-team', { team: JSON.stringify(this.team) }]);
+  }
+  
 
   getProjectsButton(teamId: number): void {
     // Navigate to the Projects component with the team ID as a parameter
@@ -51,6 +58,7 @@ export class TeamCardComponent {
     console.log(this.projects);
     this.router.navigate(['/projects']);
   }
+
 
   
 }
