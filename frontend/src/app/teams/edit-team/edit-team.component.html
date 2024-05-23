@@ -51,10 +51,13 @@
         </div>
   
         <div class="flex justify-end space-x-4">
-            <button type="submit" class="bg-green-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">
+            <button (click)="this.editTeam()" type="submit" class="bg-green-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">
                 Submit Edit
             </button>
-            <button (click)="this.onCancel()" class="bg-red-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">
+            <button (click)="this.deleteTeam()" class="bg-red-600 hover:bg-red-800 text-white font-semibold py-2 px-4 rounded-md">
+                Delete
+            </button>
+            <button (click)="this.onCancel()" class="bg-blue-500 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded-md">
               Cancel
           </button>
         </div>

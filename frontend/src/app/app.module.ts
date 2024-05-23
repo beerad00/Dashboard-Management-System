@@ -26,6 +26,7 @@ import { AddAnnouncementComponent } from './announcements/add-announcement/add-a
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditAnnouncementComponent } from './announcements/edit-announcement/edit-announcement.component';
 import { EditTeamComponent } from './teams/edit-team/edit-team.component';
+import { EditUserComponent } from './users/edit-user/edit-user.component';
 
 
 
@@ -36,6 +37,8 @@ const routes: Routes = [
   { path: "edit-project", component: EditProjectComponent},
   { path: "company-select", component: CompanySelectComponent},
   { path: "add-user", component: AddUserComponent},
+  { path: 'edit-user', component: EditUserComponent},
+  { path: 'edit-user/:userId', component: EditUserComponent },
   { path: "add-announcement", component: AddAnnouncementComponent},
   { path: 'edit-announcement', component: EditAnnouncementComponent },
   { path: 'edit-announcement/:announcement', component: EditAnnouncementComponent },  
@@ -73,7 +76,8 @@ const routes: Routes = [
     PageNotFoundComponent,
     AddAnnouncementComponent,
     EditAnnouncementComponent,
-    EditTeamComponent
+    EditTeamComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,

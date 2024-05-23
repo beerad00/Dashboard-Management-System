@@ -34,7 +34,9 @@ export class AnnouncementsComponent {
       this.router.navigate(['/login']);
     }
     this.selectedCompanyId = this.authService.getCurrentCompanyId();
-    this.getAnnouncements();
+    setTimeout(() => {
+      this.getAnnouncements();
+    }, 1000);
   }
 
   

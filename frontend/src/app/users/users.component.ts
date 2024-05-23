@@ -41,6 +41,17 @@ export class UsersComponent {
   }
 }
 
+editUser(userId: number) {
+    this.router.navigate(['/edit-user', userId]);
+}
+
+deleteUser(userId: number) {
+  console.log('Deleting user with id: ', userId);
+  this.authService.deleteUser(userId).then(() => {
+    this.fetchUsers(this.selectedCompanyId);
+  });
+}
+
   navigateToAddUser() {
     this.router.navigate(['/add-user']);
   }

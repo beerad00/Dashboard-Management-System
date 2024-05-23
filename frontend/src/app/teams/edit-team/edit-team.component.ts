@@ -38,7 +38,6 @@ export class EditTeamComponent {
         this.teamRequest = JSON.parse(teamToEdit) as TeamDto;
       }
     });
-    console.log(this.teamRequest);
  
     this.companyId = this.authService.getCurrentCompanyId();
     this.getCompanyEmployees();
@@ -63,6 +62,29 @@ export class EditTeamComponent {
         console.error('Failed to load users', error);
     }
   }
+}
+
+editTeam() {
+  if(this.teamId){
+    try {
+      this.teamService.editTeam(this.teamRequest);
+      this.router.navigate(['/teams']);
+    } catch (error) {
+      console.error('Failed to edit team', error);
+    }
+  }
+}
+
+deleteTeam() {
+  if(this.teamRequest.id){
+    try {
+      this.teamService.deleteTeam(this.teamRequest.id);
+      this.router.navigate(['/teams']);
+    } catch (error) {
+      console.error('Failed to delete team', error);
+    }
+  }
+
 }
 
   onSubmit() {

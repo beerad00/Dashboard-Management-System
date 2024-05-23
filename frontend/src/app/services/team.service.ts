@@ -45,4 +45,24 @@ export class TeamService {
     return team;
   }
 
+  editTeam(teamRequest: TeamDto){
+    this.http.put(`${this.apiUrl}/${teamRequest.id}`, teamRequest).subscribe(
+      response => {
+        console.log('Team updated successfully', response);
+      }, error => {
+        console.error('Error updating team', error);
+      });
+  
+    this.router.navigate(['/admin-dashboard']);
+  }
+
+  deleteTeam(teamId: number){
+    this.http.delete(`${this.apiUrl}/${teamId}`).subscribe(
+      response => {
+        console.log('Team deleted successfully', response);
+      }, error => {
+        console.error('Error deleting team', error);
+      });
+  }
+
 }

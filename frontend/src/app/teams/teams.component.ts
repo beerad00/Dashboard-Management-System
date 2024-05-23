@@ -41,11 +41,9 @@ export class TeamsComponent {
       this.router.navigate(['/login']);
     }
     this.isAdmin = this.currentUser.admin;
-
-    this.getTeams();
-    setInterval(() => {
+    setTimeout(() => {
       this.getTeams();
-    }, 2000);
+    }, 1000);
   }
 
 

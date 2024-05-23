@@ -57,6 +57,8 @@ export class EditAnnouncementComponent {
         this.announcement = JSON.parse(announcementString);
       }
     });
+    this.selectedCompanyId = this.authService.getCurrentCompanyId();
+    this.currentUser = this.authService.getCurrentUser();
   }
 
 
@@ -68,7 +70,7 @@ export class EditAnnouncementComponent {
 
   async onSaveAnnouncement(newAnnouncement: AnnouncementDto) {
     try {
-      await this.createAnnouncement(newAnnouncement);
+      await this.editAnnouncement(newAnnouncement);
       this.creatingAnnouncement = false;
     } catch (error) {
       console.error('Failed to save announcement', error);
@@ -83,8 +85,8 @@ export class EditAnnouncementComponent {
 
   async onSave() {
     try {
-      const createdAnnouncement = await this.announcementService.createAnnouncement(this.selectedCompanyId!, this.currentUser.id, this.announcement);
-      this.createAnnouncement(createdAnnouncement);
+      const createdAnnouncement = await this.announcementService.editAnnouncement( this.announcement.id, this.announcement);
+      this.editAnnouncement(createdAnnouncement);
       this.router.navigate(['/announcements']);
     } catch (error) {
       console.error('Failed to create announcement', error);
@@ -92,10 +94,10 @@ export class EditAnnouncementComponent {
   }
 
 
-  async createAnnouncement(announcement: AnnouncementDto): Promise<void> {
+  async editAnnouncement(announcement: AnnouncementDto): Promise<void> {
     if(this.selectedCompanyId) {
         try {
-          await this.announcementService.createAnnouncement(this.selectedCompanyId, this.currentUser.id, announcement);
+          await this.announcementService.editAnnouncement(this.announcement.id, announcement);
         } catch (error) {
           this.handleError('Failed to create announcement', error);
         }
@@ -103,10 +105,12 @@ export class EditAnnouncementComponent {
         this.errorMessage = 'User is not logged in.';
       }
     } 
-  
-  
 
 
+    deleteAnnouncement() {
+      this.announcementService.deleteAnnouncement(this.announcement.id);
+      this.router.navigate(['/announcements']);
+    }
 
   private handleError(message: string, error: any): void {
     console.error(message, error);

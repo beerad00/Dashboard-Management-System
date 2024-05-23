@@ -84,6 +84,29 @@ export class AuthService {
   get isAdmin(): Observable<boolean> {
     console.log('adminStatus', this.adminStatus.asObservable());
     return this.adminStatus.asObservable();
+
+    
+  }
+
+  async updateUser(userId: number, user: UserRequestDto): Promise<FullUserDto> {
+    try {
+      const response = await this.http.put<FullUserDto>(`${this.apiUrl}/${userId}`, user).toPromise();
+      if (!response) {
+        throw new Error('Failed to update user');
+      }
+      return response;
+    } catch (error) {
+      this.handleError(error);
+      throw error;
+    }
+  }
+
+  async deleteUser(userId: number): Promise<void> {
+    try {
+      await this.http.delete(`${this.apiUrl}/${userId}`).toPromise();
+    } catch (error) {
+      this.handleError(error);
+    }
   }
   
 

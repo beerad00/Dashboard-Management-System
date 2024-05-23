@@ -7,12 +7,10 @@
       <small class="text-gray-500 underline">Posted on: {{ announcement.date | date }}</small>
       <p class="text-gray-800">Author: {{ announcement.author.profile.firstName }} {{ announcement.author.profile.lastName }}</p>
       <div class="flex flex-row">
-      <button class="text-center bg-blue-500 hover:bg-green-600 text-white font-semibold py-2 rounded-md my-2 w-fit px-4 mx-1" (click)="editAnnouncement()">
+      <button *ngIf="this.currentUser.admin" class="text-center bg-blue-500 hover:bg-green-600 text-white font-semibold py-2 rounded-md my-2 w-fit px-4 mx-1" (click)="editAnnouncement()">
         <img src="assets/EDIT.svg" alt="Edit Icon" style="width: 24px; height: 24px;" class="text-center">
       </button>
-      <button class="text-center bg-red-500 hover:bg-green-600 text-white font-semibold py-2 rounded-md my-2 w-fit px-4 mx-1" (click)="editAnnouncement()">
-        <img src="assets/DELETE.svg" alt="Delete Icon" style="width: 24px; height: 24px;" class="text-center">
-      </button>
+
     </div>
     </div>
   </div>
