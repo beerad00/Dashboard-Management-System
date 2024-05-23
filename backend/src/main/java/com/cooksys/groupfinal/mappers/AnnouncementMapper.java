@@ -15,6 +15,8 @@ public interface AnnouncementMapper {
 
     Announcement dtoToEntity(AnnouncementDto announcementDto);
 
-  LinkedHashSet<AnnouncementDto> entitiesToDtos(Set<Announcement> announcement);
+  Set<AnnouncementDto> entitiesToDtos(Set<Announcement> announcement);
+
+  LinkedHashSet<AnnouncementDto> entitiesToOrderedDtos(Set<Announcement> announcement);
     
 }

@@ -61,7 +61,7 @@ public class CompanyServiceImpl implements CompanyService {
 		List<Announcement> sortedList = new ArrayList<Announcement>(company.getAnnouncements());
 		sortedList.sort(Comparator.comparing(Announcement::getDate).reversed());
 		Set<Announcement> sortedSet = new LinkedHashSet<>(sortedList);
-		return announcementMapper.entitiesToDtos(sortedSet);
+		return announcementMapper.entitiesToOrderedDtos(sortedSet);
 	}
 
 	@Override
