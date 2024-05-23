@@ -35,4 +35,21 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         return announcementMapper.entityToDto(announcementRepository.saveAndFlush(announcement));
     }
 
+    public AnnouncementDto updateAnnoucement(Long announcementId, AnnouncementDto announcementDto)
+    {
+        Announcement newannoucement = announcementMapper.dtoToEntity(announcementDto);
+        newannoucement.setId(announcementId);
+        newannoucement.setDate(announcementRepository.findById(announcementId).get().getDate());
+        newannoucement.setCompany(announcementRepository.findById(announcementId).get().getCompany());
+        return announcementMapper.entityToDto(announcementRepository.saveAndFlush(newannoucement));
+
+    }
+
+    public AnnouncementDto deleteAnnoucement(Long announcementId)
+    {
+        Announcement deletedannouncement = announcementRepository.findById(announcementId).get();
+        announcementRepository.delete(deletedannouncement);
+        return announcementMapper.entityToDto(deletedannouncement);
+    }
+
 }

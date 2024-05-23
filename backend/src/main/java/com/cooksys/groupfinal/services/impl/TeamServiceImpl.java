@@ -25,4 +25,25 @@ public class TeamServiceImpl implements TeamService {
         return teamMapper.entityToDto(teamRepository.saveAndFlush(team));
     }
 
+    public TeamDto updateTeam(Long teamId, TeamDto teamDto)
+    {
+        Team newteam = teamMapper.dtoToEntity(teamDto);
+        newteam.setId(teamId);
+        newteam.setCompany(teamRepository.findById(teamId).get().getCompany());
+        return teamMapper.entityToDto(teamRepository.saveAndFlush(newteam));
+    }
+
+
+    public TeamDto deleteTeam(Long teamId)
+    {
+        Team deletedteam = teamRepository.findById(teamId).get();
+        Team returnteam = new Team();
+        returnteam.setId(deletedteam.getId());
+        returnteam.setDescription(deletedteam.getDescription());
+        returnteam.setName(deletedteam.getName());
+        returnteam.setProjects(deletedteam.getProjects());
+        returnteam.setCompany(deletedteam.getCompany());
+        teamRepository.delete(deletedteam);
+        return teamMapper.entityToDto(returnteam);
+    }
 }

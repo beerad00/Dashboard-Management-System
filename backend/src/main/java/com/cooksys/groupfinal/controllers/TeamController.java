@@ -20,4 +20,14 @@ public class TeamController {
 		return teamService.createTeam(companyId, teamDto);
 	}
 
+	@PutMapping("/{teamId}")
+	public TeamDto updateTeam(@PathVariable Long teamId, @RequestBody TeamDto teamDto) {
+		return teamService.updateTeam(teamId, teamDto);
+	}
+
+	@DeleteMapping("/{teamId}")
+	public TeamDto deleteTeam(@PathVariable Long teamId) {
+		return teamService.deleteTeam(teamId);
+	}
+
 }

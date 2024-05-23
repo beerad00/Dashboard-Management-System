@@ -4,14 +4,12 @@ import java.util.Optional;
 import java.util.Set;
 
 import com.cooksys.groupfinal.dtos.*;
-import com.cooksys.groupfinal.entities.Company;
-import com.cooksys.groupfinal.entities.Profile;
+import com.cooksys.groupfinal.entities.*;
 import com.cooksys.groupfinal.mappers.CompanyMapper;
 import com.cooksys.groupfinal.repositories.CompanyRepository;
+import com.cooksys.groupfinal.repositories.TeamRepository;
 import org.springframework.stereotype.Service;
 
-import com.cooksys.groupfinal.entities.Credentials;
-import com.cooksys.groupfinal.entities.User;
 import com.cooksys.groupfinal.exceptions.BadRequestException;
 import com.cooksys.groupfinal.exceptions.NotAuthorizedException;
 import com.cooksys.groupfinal.exceptions.NotFoundException;
@@ -31,6 +29,7 @@ public class UserServiceImpl implements UserService {
 	private final CredentialsMapper credentialsMapper;
     private final CompanyRepository companyRepository;
     private final CompanyMapper companyMapper;
+    private final TeamRepository teamRepository;
 
     private User findUser(String username) {
         Optional<User> user = userRepository.findByCredentialsUsernameAndActiveTrue(username);
@@ -97,6 +96,33 @@ public class UserServiceImpl implements UserService {
 
         return fullUserMapper.entityToFullUserDto(savedUser);
 
+    }
+
+    public FullUserDto updateUser(Long userId, FullUserDto userDto)
+    {
+        User user = fullUserMapper.DtoToEntity(userDto);
+        User prevuser =  userRepository.findById(userId).get();
+        user.setCredentials(prevuser.getCredentials());
+        user.getProfile().setPhone(prevuser.getProfile().getPhone());
+        user.setAnnouncements(prevuser.getAnnouncements());
+        user.setCompanies(prevuser.getCompanies());
+        user.setTeams(prevuser.getTeams());
+        user.setId(userId);
+        return fullUserMapper.entityToFullUserDto(userRepository.saveAndFlush(user));
+    }
+
+    public FullUserDto deleteUser(Long userId)
+    {
+        User user = userRepository.findById(userId).get();
+        Set<Company> belongingcompany = user.getCompanies();
+        belongingcompany.stream().forEach((company -> {company.getEmployees().remove(user);}));
+        Set<Team> beloningteams = user.getTeams();
+        beloningteams.stream().forEach((team -> {team.getTeammates().remove(user);}));
+        teamRepository.saveAll(beloningteams);
+        companyRepository.saveAll(belongingcompany);
+        userRepository.delete(user);
+
+        return fullUserMapper.entityToFullUserDto(user);
     }
 
 
