@@ -22,16 +22,18 @@ export class AddUserComponent implements OnInit {
   };
   confirmPassword: string = '';
   companyId: number | null = null;
+  passwordError: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.companyId = Number(localStorage.getItem('selectedCompanyId'));
+    this.companyId = this.authService.getCurrentCompanyId();
    
   }
 
   async onSubmit() {
     if (this.userRequest.password !== this.confirmPassword) {
+      this.passwordError = true;
       console.error('Passwords do not match');
       return;
     }
@@ -41,7 +43,7 @@ export class AddUserComponent implements OnInit {
         this.userRequest.companyId = this.companyId;
         await this.authService.register(this.userRequest);
         console.log('User added successfully', this.userRequest);
-        this.router.navigate(['/users']);
+        this.navigateToUsers();
       } catch (error) {
         console.error('Adding user failed', error);
       }

@@ -17,11 +17,12 @@
       <label class="text-xl font-bold" for="phone">Phone</label>
       <input class="form-group input" type="text" id="phone" [(ngModel)]="userRequest.phone" name="phone" required>
 
+      <h1 *ngIf="this.passwordError" class="text-xl text-red-500">Passwords Do Not Match</h1>
       <label class="text-xl font-bold" for="password">Password</label>
       <input class="form-group input" type="password" id="password" [(ngModel)]="userRequest.password" name="password" required>
 
       
-
+      <h1 *ngIf="this.passwordError" class="text-xl text-red-500">Passwords Do Not Match</h1>
       <label class="text-xl font-bold" for="confirmPassword">Confirm Password</label>
       <input class="form-group input" type="password" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" required>
 
