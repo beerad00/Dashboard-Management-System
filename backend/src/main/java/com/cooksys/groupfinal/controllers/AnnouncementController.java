@@ -21,4 +21,14 @@ public class AnnouncementController {
 		return announcementService.createAnnoucement(companyId, userId, announcementDto);
 	}
 
+	@PutMapping("/{announcementId}")
+	public AnnouncementDto updateAnnouncement(@PathVariable Long announcementId, @RequestBody AnnouncementDto announcementDto) {
+		return announcementService.updateAnnoucement(announcementId, announcementDto);
+	}
+
+	@DeleteMapping("/{announcementId}")
+	public AnnouncementDto deleteAnnouncement(@PathVariable Long announcementId) {
+		return announcementService.deleteAnnoucement(announcementId);
+	}
+
 }
