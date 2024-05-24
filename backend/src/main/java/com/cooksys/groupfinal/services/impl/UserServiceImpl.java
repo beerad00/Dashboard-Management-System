@@ -70,12 +70,16 @@ public class UserServiceImpl implements UserService {
         newUser.setAdmin(createUserDto.isAdmin());
         newUser.setActive(true);
 
+        if(createUserDto.getUsername() == null){
+            throw new BadRequestException();
+        }
+
         Optional<Company> associateCompany = companyRepository.findById(createUserDto.getCompanyId());
         Company company = null;
         if (associateCompany.isPresent()) {
             company = associateCompany.get();
             newUser.getCompanies().add(company);
-            company.getEmployees().add(newUser);// Add the company to the user's list of companies
+            company.getEmployees().add(newUser);
         }
 
         Profile newProfile = new Profile();
