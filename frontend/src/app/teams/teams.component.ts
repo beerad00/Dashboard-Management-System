@@ -33,8 +33,10 @@ export class TeamsComponent {
   selectedTeamId: number | null = null;
   errorMessage: string = '';
   isAdmin: boolean = false;
+  isLoading: boolean = false;
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.currentUser = this.authService.getCurrentUser();
     this.selectedCompanyId = this.authService.getCurrentCompanyId();
     if(this.currentUser == null){
@@ -88,6 +90,7 @@ export class TeamsComponent {
 
   private handleTeamsResponse(teams: TeamDto[]): void {
     this.teams = teams;
+    this.isLoading = false;
   }
 
   private handleProjectsResponse(projects: ProjectDto[]): void {

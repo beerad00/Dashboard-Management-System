@@ -27,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditAnnouncementComponent } from './announcements/edit-announcement/edit-announcement.component';
 import { EditTeamComponent } from './teams/edit-team/edit-team.component';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
+import { LoadingComponent } from './loading/loading.component';
 
 
 
@@ -77,7 +78,8 @@ const routes: Routes = [
     AddAnnouncementComponent,
     EditAnnouncementComponent,
     EditTeamComponent,
-    EditUserComponent
+    EditUserComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

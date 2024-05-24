@@ -19,6 +19,7 @@ export class AnnouncementsComponent {
   errorMessage: string = '';
   loading: boolean = false;
   creatingAnnouncement: boolean = false;
+  isLoading: boolean = true;
 
 
   constructor(
@@ -34,6 +35,7 @@ export class AnnouncementsComponent {
       this.router.navigate(['/login']);
     }
     this.selectedCompanyId = this.authService.getCurrentCompanyId();
+    this.loading = true;
     setTimeout(() => {
       this.getAnnouncements();
     }, 1000);
@@ -76,7 +78,7 @@ export class AnnouncementsComponent {
 
   private handleAnnouncementsResponse(announcements: AnnouncementDto[]): void {
     this.announcements = announcements;
-    this.loading = false;
+    this.isLoading = false;
   }
 
   private handleError(message: string, error: any): void {
