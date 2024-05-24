@@ -1,0 +1,45 @@
+
+<div class="flex flex-col justify-center" *ngIf="projects.length === 0 || projects === null">
+  <h2 class="text-4xl font-bold mb-6 text-center underline">Projects</h2>
+  <h1 class="text-center text-2xl font-bold">Uh Oh!</h1>
+  <h1 class="text-center text-1xl">No projects have been created for this team yet!</h1>
+  <button class="button m-auto mt-8 p-8 " (click)="this.returnToTeams()">Return to Teams</button>
+  <div *ngIf="this.currentUser?.admin" class="items-center justify-center text-center" (click)="this.onCreateProject()">
+    <button class="button m-auto mt-8 p-8" (click)="this.addProject()">Create a New Project!</button>
+</div>
+</div>
+
+
+<div *ngIf="projects.length > 0" class="p-4">
+
+  <h2 class="text-4xl font-bold mb-6 text-center underline">Projects</h2>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div *ngIf="currentUser?.admin" class="project-card p-6 border rounded-lg shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out flex items-center justify-center text-center" (click)="addProject()">
+      <button class="w-full h-full text-2xl bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-300 ease-in-out flex items-center justify-center">
+        Add Project!
+      </button>
+    </div>
+  
+    <div *ngFor="let project of projects" class="project-card p-6 border rounded-lg shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-col">
+      <div *ngIf="selectedProject === project; else projectView">
+        <app-edit-project 
+          [project]="project"
+          (save)="onSaveProject($event)"
+          (cancel)="onCancelEdit()">
+        </app-edit-project>
+      </div>
+      <ng-template #projectView>
+        <h3 class="text-xl font-bold text-gray-800 mb-3 break-words">{{ project.name }}</h3>
+        <p class="text-gray-600 mb-4 break-words">{{ project.description }}</p>
+        <div class="mt-auto flex justify-end w-full">
+          <button *ngIf="isTeamMember || currentUser?.admin" class="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600 transition-colors duration-300 ease-in-out" (click)="onEditProject(project)">
+            Edit Project
+          </button>
+        </div>
+      </ng-template>
+      
+    </div>
+  </div>
+  
+  

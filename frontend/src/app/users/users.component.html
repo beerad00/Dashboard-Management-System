@@ -1,0 +1,35 @@
+<div class="mx-auto max-w-full sm:max-w-screen-md rounded-lg px-4 py-8">
+    <h1 class="text-4xl underline font-bold mb-4 text-center">User Registry</h1>
+    <div class="mt-4 text-center">
+        
+        <button (click)="navigateToAddUser()" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 mb-12 rounded animate-pulse">
+            Add User
+        </button>
+    </div>
+    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div *ngFor="let user of users" class="bg-white shadow-md rounded-lg p-4">
+            <img src="assets/PROFILEPHOTO.svg" alt="Delete Icon" style="width: 50px; height: 50px;" class="m-auto">
+            <h2 class="text-lg font-semibold mb-2">{{ user.profile.firstName }} {{ user.profile.lastName }}</h2>
+            <p class="text-sm text-gray-600 mb-2">{{ user.profile.email }}</p>
+            <p class="text-sm mb-2">Active: <span class="{{ user.active ? 'text-green-500 font-semibold' : 'text-red-500 font-normal' }}">{{ user.active ? 'YES' : 'NO' }}</span></p>
+            <p class="text-sm mb-2">Admin: {{ user.admin ? 'YES' : 'NO' }}</p>
+            <p class="text-sm mb-2">Status: <span class="{{
+                user.status === 'PENDING' ? 'text-yellow-500 font-semibold' : 
+                (user.status === 'JOINED' ? 'text-green-500 font-semibold' : 'text-black font-normal')
+            }}">{{ user.status }}</span></p>
+<div class="flex justify-evenly mt-6">
+    <button (click)="this.editUser(user.id)" class="bg-blue-500 hover:bg-green-600 text-white font-semibold rounded flex items-center px-2 m-2">
+        <img src="assets/EDIT.svg" alt="Edit Icon" style="width: 20px; height: 20px;" class="mr-2">
+        Edit
+    </button>
+    <button (click)="this.deleteUser(user.id)" class="bg-red-500 hover:bg-red-600 text-white font-semibold  rounded flex items-center px-2 m-2">
+        <img src="assets/DELETE.svg" alt="Delete Icon" style="width: 20px; height: 20px;" class="mr-2">
+        Delete
+    </button>
+</div>
+
+    </div>
+
+</div>
+
+
