@@ -2,6 +2,7 @@ package com.cooksys.groupfinal.services.impl;
 
 import com.cooksys.groupfinal.dtos.AnnouncementDto;
 import com.cooksys.groupfinal.entities.Announcement;
+import com.cooksys.groupfinal.exceptions.BadRequestException;
 import com.cooksys.groupfinal.mappers.AnnouncementMapper;
 import com.cooksys.groupfinal.repositories.AnnouncementRepository;
 import com.cooksys.groupfinal.repositories.CompanyRepository;
@@ -37,6 +38,13 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 
     public AnnouncementDto updateAnnoucement(Long announcementId, AnnouncementDto announcementDto)
     {
+        try{
+            announcementRepository.findById(announcementId).get();
+        }
+        catch (Exception e)
+        {
+            throw new BadRequestException("Team not found");
+        }
         Announcement newannoucement = announcementMapper.dtoToEntity(announcementDto);
         newannoucement.setId(announcementId);
         newannoucement.setDate(announcementRepository.findById(announcementId).get().getDate());
@@ -47,6 +55,13 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 
     public AnnouncementDto deleteAnnoucement(Long announcementId)
     {
+        try{
+            announcementRepository.findById(announcementId).get();
+        }
+        catch (Exception e)
+        {
+            throw new BadRequestException("Team not found");
+        }
         Announcement deletedannouncement = announcementRepository.findById(announcementId).get();
         announcementRepository.delete(deletedannouncement);
         return announcementMapper.entityToDto(deletedannouncement);

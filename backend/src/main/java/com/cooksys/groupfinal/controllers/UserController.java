@@ -17,12 +17,12 @@ import java.util.Set;
 public class UserController {
 	
 	private final UserService userService;
-	
+    @ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/login")
     public FullUserDto login(@RequestBody CredentialsDto credentialsDto) {
         return userService.login(credentialsDto);
     }
-
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @GetMapping("/{id}/companies")
     public Set<CompanyDto> getCompaniesByUserId(@PathVariable Long id){
         return userService.getCompaniesByUserId(id);
@@ -36,10 +36,11 @@ public class UserController {
 
 
     @PutMapping("/{userId}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public FullUserDto updateUser(@PathVariable("userId") Long userId,@RequestBody FullUserDto UserDto) {
         return userService.updateUser(userId,UserDto);
     }
-
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @DeleteMapping("/{userId}")
     public FullUserDto deleteUser(@PathVariable("userId") Long userId) {
         return userService.deleteUser(userId);
