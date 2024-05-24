@@ -5,12 +5,15 @@ import com.cooksys.groupfinal.entities.Team;
 import com.cooksys.groupfinal.exceptions.BadRequestException;
 import com.cooksys.groupfinal.mappers.TeamMapper;
 import com.cooksys.groupfinal.repositories.CompanyRepository;
+import com.cooksys.groupfinal.repositories.ProjectRepository;
 import com.cooksys.groupfinal.repositories.TeamRepository;
 import org.springframework.stereotype.Service;
 
 import com.cooksys.groupfinal.services.TeamService;
 
 import lombok.RequiredArgsConstructor;
+
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +22,7 @@ public class TeamServiceImpl implements TeamService {
     private final TeamMapper teamMapper;
     private final TeamRepository teamRepository;
     private final CompanyRepository companyRepository;
+    private final ProjectRepository projectRepository;
     public TeamDto createTeam(Long companyId, TeamDto teamDto)
     {
         try{
@@ -66,6 +70,7 @@ public class TeamServiceImpl implements TeamService {
         returnteam.setName(deletedteam.getName());
         returnteam.setProjects(deletedteam.getProjects());
         returnteam.setCompany(deletedteam.getCompany());
+        projectRepository.deleteAll(projectRepository.findAll().stream().filter((project)->{return project.getTeam() == deletedteam;}).collect(Collectors.toList()));
         teamRepository.delete(deletedteam);
         return teamMapper.entityToDto(returnteam);
     }
