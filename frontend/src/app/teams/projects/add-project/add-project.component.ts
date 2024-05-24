@@ -45,7 +45,7 @@ project: ProjectDto = {
   }
 
   onCancel() {
-    this.router.navigate(['/projects']);
+    this.router.navigate(['/projects', this.teamId]);
   }
 
 }

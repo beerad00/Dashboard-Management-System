@@ -23,6 +23,10 @@ export class AddUserComponent implements OnInit {
   };
   confirmPassword: string = '';
   companyId: number | null = null;
+  usernameError: boolean = false;
+  firstNameError: boolean = false;
+  lastNameError: boolean = false;
+  phoneError: boolean = false;
   passwordError: boolean = false;
   emailAvailability: boolean = true;
   emailError: boolean = true;
@@ -46,6 +50,26 @@ export class AddUserComponent implements OnInit {
     if (!this.emailAvailability) {
       console.error('Email Taken');
       return;
+    }
+
+    if (this.userRequest.username === '' || this.userRequest.email === '' || this.userRequest.firstName === '' || this.userRequest.lastName === '' || this.userRequest.password === '' || this.userRequest.phone === '') {
+      if (this.userRequest.username === '') {
+        this.usernameError = true;
+      }
+      if (this.userRequest.firstName === '') {
+        this.firstNameError = true;
+      }
+      if (this.userRequest.lastName === '') {
+        this.lastNameError = true;
+      }
+      if (this.userRequest.phone === '') {
+        this.phoneError = true;
+      }
+      if (this.userRequest.password === '') {
+        this.passwordError = true;
+      }
+      return;
+
     }
 
     if (this.companyId) {
