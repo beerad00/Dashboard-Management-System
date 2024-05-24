@@ -1,0 +1,81 @@
+<div class="flex justify-center items-center min-h-screen">
+  <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+    <h1 class="text-4xl font-bold underline text-center mb-8">Add User</h1>
+    <form (ngSubmit)="onSubmit()" class="form flex flex-col space-y-4">
+      <div class="form-group">
+        <label class="block text-xl font-bold mb-2" for="username">Username</label>
+        <div *ngIf="this.firstNameError" class="text-red-500 text-lg font-semibold mb-4">
+          Please enter a username.
+        </div>
+        <input class="input w-full px-4 py-2 border rounded-lg" type="text" id="username" [(ngModel)]="userRequest.username" name="username" required>
+      </div>
+
+      
+      
+      <div class="form-group">
+        
+        <label class="block text-xl font-bold mb-2" for="email">Email</label>
+        <div *ngIf="!this.emailAvailability" class="text-red-500 text-lg font-semibold mb-4">
+          Email Already Assigned To An Account.
+        </div>
+        <input class="input w-full px-4 py-2 border rounded-lg" type="email" id="email" [(ngModel)]="userRequest.email" name="email" required>
+      </div>
+
+      
+      <div class="form-group">
+        <label class="block text-xl font-bold mb-2" for="firstName">First Name</label>
+        <div *ngIf="this.firstNameError" class="text-red-500 text-lg font-semibold mb-4">
+          Please enter a first name.
+        </div>
+        <input class="input w-full px-4 py-2 border rounded-lg" type="text" id="firstName" [(ngModel)]="userRequest.firstName" name="firstName" required>
+      </div>
+
+      <div class="form-group">
+        <label class="block text-xl font-bold mb-2" for="lastName">Last Name</label>
+        <div *ngIf="this.firstNameError" class="text-red-500 text-lg font-semibold mb-4">
+          Please enter a last name.
+        </div>
+        <input class="input w-full px-4 py-2 border rounded-lg" type="text" id="lastName" [(ngModel)]="userRequest.lastName" name="lastName" required>
+      </div>
+
+      <div class="form-group">
+        <label class="block text-xl font-bold mb-2" for="phone">Phone</label>
+        <div *ngIf="this.phoneError" class="text-red-500 text-lg font-semibold mb-4">
+          Please enter a phone number.
+        </div>
+        <input class="input w-full px-4 py-2 border rounded-lg" type="text" id="phone" [(ngModel)]="userRequest.phone" name="phone" required>
+      </div>
+
+      
+
+      <div class="form-group">
+        <label class="block text-xl font-bold mb-2" for="password">Password</label>
+        <div *ngIf="this.passwordError" class="text-red-500 text-lg font-semibold mb-4">
+          Passwords Do Not Match
+        </div>
+        <input class="input w-full px-4 py-2 border rounded-lg" type="password" id="password" [(ngModel)]="userRequest.password" name="password" required>
+      </div>
+
+      <div class="form-group">
+        <label class="block text-xl font-bold mb-2" for="confirmPassword">Confirm Password</label>
+        <div *ngIf="this.passwordError" class="text-red-500 text-lg font-semibold mb-4">
+          Passwords Do Not Match
+        </div>
+        <input class="input w-full px-4 py-2 border rounded-lg" type="password" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" required>
+      </div>
+
+      <div class="form-group">
+        <label class="block text-xl font-bold mb-2" for="admin">Make user an admin role?</label>
+        <select class="input w-full px-4 py-2 border rounded-lg" id="admin" [(ngModel)]="userRequest.admin" name="admin">
+          <option [ngValue]="true">Yes</option>
+          <option [ngValue]="false">No</option>
+        </select>
+      </div>
+
+      <div class="flex justify-between space-x-4">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg">Submit</button>
+        <button (click)="this.navigateToUsers()" type="button" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

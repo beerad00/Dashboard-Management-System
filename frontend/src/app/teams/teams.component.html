@@ -1,0 +1,15 @@
+<div class="p-4">
+  <h2 class="text-4xl font-bold underline mb-6 text-center">Teams</h2>
+  <app-loading [isLoading]="isLoading"></app-loading>
+  <div *ngIf="!isLoading">
+    <div *ngIf="teams.length > 0" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div *ngIf="currentUser?.admin" (click)="addTeam()" class="team-card flex items-center justify-center text-center cursor-pointer h-full">
+        <button class="w-full h-full text-2xl bg-blue-500 text-white rounded-lg hover:bg-green-600 transition-colors duration-300 ease-in-out flex items-center justify-center animate-pulse">
+          Add Team!
+        </button>
+      </div>
+      
+      <app-team-card *ngFor="let team of teams" [team]="team" [isAdmin]="isAdmin" class="h-full"></app-team-card>
+    </div>
+  </div>
+</div>

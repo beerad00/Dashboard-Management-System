@@ -1,0 +1,4 @@
+<ng-container *ngIf="(authService.isLoggedIn | async) && (authService.hasCompanyId | async)">
+  <app-navbar></app-navbar>
+</ng-container>
+<router-outlet></router-outlet>

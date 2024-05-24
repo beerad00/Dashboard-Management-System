@@ -1,0 +1,14 @@
+<div class="login-container">
+    <div class="login-box">
+      <h1 class="text-4xl font-bold underline" >Select Company</h1>
+      <form class="flex flex-col justify-evenly items-center" (ngSubmit)="onSelectCompany()">
+        <label class="" for="company">Company</label>
+        <select class="bg-orange-200 w-48 p-4 m-8 rounded-md" id="company" [(ngModel)]="selectedCompanyId" name="company" required>
+          <option  class="bg-orange-100 text-black text-center w-48 p-4 m-8 rounded-md" *ngFor="let company of companies" [value]="company.id">{{ company.name }}</option>
+        </select>
+        <button class="button" type="submit">Select Company</button>
+      </form>
+      <button class="button my-8" (click)="this.backToLogin()" type="submit">Back to Login</button>
+    </div>
+  </div>
+  
