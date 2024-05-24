@@ -4,7 +4,7 @@
     <form (ngSubmit)="onSubmit()" class="form flex flex-col space-y-4">
       <div class="form-group">
         <label class="block text-xl font-bold mb-2" for="username">Username</label>
-        <div *ngIf="!this.firstNameError" class="text-red-500 text-lg font-semibold mb-4">
+        <div *ngIf="this.firstNameError" class="text-red-500 text-lg font-semibold mb-4">
           Please enter a username.
         </div>
         <input class="input w-full px-4 py-2 border rounded-lg" type="text" id="username" [(ngModel)]="userRequest.username" name="username" required>
@@ -24,7 +24,7 @@
       
       <div class="form-group">
         <label class="block text-xl font-bold mb-2" for="firstName">First Name</label>
-        <div *ngIf="!this.firstNameError" class="text-red-500 text-lg font-semibold mb-4">
+        <div *ngIf="this.firstNameError" class="text-red-500 text-lg font-semibold mb-4">
           Please enter a first name.
         </div>
         <input class="input w-full px-4 py-2 border rounded-lg" type="text" id="firstName" [(ngModel)]="userRequest.firstName" name="firstName" required>
@@ -32,7 +32,7 @@
 
       <div class="form-group">
         <label class="block text-xl font-bold mb-2" for="lastName">Last Name</label>
-        <div *ngIf="!this.firstNameError" class="text-red-500 text-lg font-semibold mb-4">
+        <div *ngIf="this.firstNameError" class="text-red-500 text-lg font-semibold mb-4">
           Please enter a last name.
         </div>
         <input class="input w-full px-4 py-2 border rounded-lg" type="text" id="lastName" [(ngModel)]="userRequest.lastName" name="lastName" required>
@@ -40,7 +40,7 @@
 
       <div class="form-group">
         <label class="block text-xl font-bold mb-2" for="phone">Phone</label>
-        <div *ngIf="!this.phoneError" class="text-red-500 text-lg font-semibold mb-4">
+        <div *ngIf="this.phoneError" class="text-red-500 text-lg font-semibold mb-4">
           Please enter a phone number.
         </div>
         <input class="input w-full px-4 py-2 border rounded-lg" type="text" id="phone" [(ngModel)]="userRequest.phone" name="phone" required>
