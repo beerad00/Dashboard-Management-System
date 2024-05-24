@@ -1,35 +1,48 @@
 <div class="mx-auto max-w-md p-6 my-8 bg-white shadow-md rounded-md">
-    <h2 class="text-lg font-semibold mb-4">Create Announcement</h2>
-    <form (ngSubmit)="onSave()" class="space-y-4">
-      <div>
-        <label for="title" class="block text-sm font-medium text-gray-700">Title:</label>
-        <input 
-          id="title" 
-          name="title" 
-          type="text"
-          [(ngModel)]="announcement.title" 
-          required 
-          class="w-full px-3 py-2 border rounded-md mb-4"
-          placeholder="Enter Title">
+  <h2 class="text-lg font-semibold mb-4">Create Announcement</h2>
+  <form (ngSubmit)="onSave()" #announcementForm="ngForm" class="space-y-4">
+    <div>
+      <label for="title" class="block text-sm font-medium text-gray-700">Title:</label>
+      <input 
+        id="title" 
+        name="title" 
+        type="text"
+        [(ngModel)]="announcement.title" 
+        required 
+        #title="ngModel"
+        class="w-full px-3 py-2 border rounded-md mb-4"
+        placeholder="Enter Title">
+      <div *ngIf="title.invalid && (title.dirty || title.touched)" class="text-red-500 text-sm font-semibold">
+        Title is required
       </div>
-      <div>
-        <label for="message" class="block text-sm font-medium text-gray-700">Message:</label>
-        <textarea 
-          id="message" 
-          name="message" 
-          [(ngModel)]="announcement.message" 
-          required 
-          class="w-full px-3 py-2 border rounded-md mb-4"
-          placeholder="Enter Message"></textarea>
+    </div>
+    <div>
+      <label for="message" class="block text-sm font-medium text-gray-700">Message:</label>
+      <textarea 
+        id="message" 
+        name="message" 
+        [(ngModel)]="announcement.message" 
+        required 
+        #message="ngModel"
+        class="w-full px-3 py-2 border rounded-md mb-4"
+        placeholder="Enter Message"></textarea>
+      <div *ngIf="message.invalid && (message.dirty || message.touched)" class="text-red-500 text-sm font-semibold">
+        Message is required
       </div>
-      <div *ngIf="this.currentUser.admin" class="flex justify-end space-x-4">
-        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">
-          Save
-        </button>
-        <button type="button" (click)="onCancel()" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-md">
-          Cancel
-        </button>
-      </div>
-    </form>
-  </div>
-  
+    </div>
+    <div *ngIf="currentUser?.admin" class="flex justify-end space-x-4">
+      <button 
+        type="submit" 
+        class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md"
+        [disabled]="announcementForm.invalid">
+        Save
+      </button>
+      <button 
+        type="button" 
+        (click)="onCancel()" 
+        class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-md">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
