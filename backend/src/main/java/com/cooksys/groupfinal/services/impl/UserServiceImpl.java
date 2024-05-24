@@ -58,6 +58,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Set<CompanyDto> getCompaniesByUserId(Long id) {
+        try{
+            companyRepository.findByUserId(id);
+        }
+        catch (Exception e)
+        {
+            throw new BadRequestException("Company not found");
+        }
+
         Set<Company> companiesFound = companyRepository.findByUserId(id);
 
         return companyMapper.entitiesToDtos(companiesFound);
@@ -104,6 +112,13 @@ public class UserServiceImpl implements UserService {
 
     public FullUserDto updateUser(Long userId, FullUserDto userDto)
     {
+        try{
+            userRepository.findById(userId).get();
+        }
+        catch (Exception e)
+        {
+            throw new BadRequestException("User not found");
+        }
         User user = fullUserMapper.DtoToEntity(userDto);
         User prevuser =  userRepository.findById(userId).get();
         user.setCredentials(prevuser.getCredentials());
@@ -117,6 +132,13 @@ public class UserServiceImpl implements UserService {
 
     public FullUserDto deleteUser(Long userId)
     {
+        try{
+            userRepository.findById(userId).get();
+        }
+        catch (Exception e)
+        {
+            throw new BadRequestException("User not found");
+        }
         User user = userRepository.findById(userId).get();
         Set<Company> belongingcompany = user.getCompanies();
         belongingcompany.stream().forEach((company -> {company.getEmployees().remove(user);}));
