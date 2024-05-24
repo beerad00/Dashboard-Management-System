@@ -44,7 +44,7 @@ export class LoginComponent {
       }
     } catch (error) {
       console.error('Login failed', error);
-      this.errorMessage = 'Login failed. Please check your credentials and try again.';
+      this.errorMessage = 'Invalid username or password. Please try again.';
     }
   }
 }
